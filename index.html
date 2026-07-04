@@ -5,134 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>不規則動詞測驗 - P.5 English</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            margin: 0;
-            padding: 15px;
-            color: #333;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        header {
-            background: #4a6fa5;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 { margin: 0; font-size: 2.2em; }
-        .main { padding: 20px; }
-        .score {
-            text-align: center;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            padding: 12px;
-            background: #e8f5e9;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-        .question {
-            background: #f8f9fa;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            border-left: 6px solid #4a6fa5;
-        }
-        .verb-base {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 15px 0;
-            text-align: center;
-        }
-        .input-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .input-box {
-            flex: 1;
-            min-width: 260px;
-        }
-        .input-box label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #555;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            font-size: 1.1em;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-        .submit-all {
-            display: block;
-            margin: 20px auto;
-            background: #4a6fa5;
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2em;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .feedback {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-        .correct { background: #d4edda; color: #155724; }
-        .wrong { background: #f8d7da; color: #721c24; }
-        .table-wrapper {
-            overflow-x: auto;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        table {
-            min-width: 900px;
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            white-space: nowrap;
-        }
-        th { background: #4a6fa5; color: white; }
-        button { margin: 5px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); margin:0; padding:15px; color:#333; }
+        .container { max-width:900px; margin:0 auto; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); overflow:hidden; }
+        header { background:#4a6fa5; color:white; padding:20px; text-align:center; }
+        h1 { margin:0; font-size:2.2em; }
+        .main { padding:20px; }
+        .score { text-align:center; font-size:1.5em; margin:15px; padding:12px; background:#e8f5e9; border-radius:10px; font-weight:bold; }
+        .question { background:#f8f9fa; padding:20px; margin-bottom:20px; border-radius:12px; border-left:6px solid #4a6fa5; }
+        .verb-base { font-size:1.8em; font-weight:bold; color:#2c3e50; text-align:center; margin:15px 0; }
+        .input-group { display:flex; gap:15px; flex-wrap:wrap; }
+        .input-box { flex:1; min-width:260px; }
+        input { width:100%; padding:12px; font-size:1.1em; border:2px solid #ddd; border-radius:8px; }
+        button { padding:12px 25px; margin:8px; background:#4a6fa5; color:white; border:none; border-radius:8px; cursor:pointer; font-size:1.05em; }
+        .submit-all { display:block; margin:20px auto; padding:15px 40px; font-size:1.2em; }
+        .feedback { margin-top:15px; padding:15px; border-radius:10px; }
+        .correct { background:#d4edda; color:#155724; }
+        .wrong { background:#f8d7da; color:#721c24; }
+        .tabs { display:flex; justify-content:center; margin:15px 0; flex-wrap:wrap; }
+        .tab-btn { padding:10px 20px; margin:5px; background:#e2e8f0; border:none; border-radius:8px; cursor:pointer; }
+        .tab-btn.active { background:#4a6fa5; color:white; }
+        .table-wrapper { overflow-x:auto; border:1px solid #ddd; border-radius:8px; }
+        table { min-width:900px; width:100%; border-collapse:collapse; }
+        th, td { padding:12px; border:1px solid #ddd; white-space:nowrap; }
+        th { background:#4a6fa5; color:white; }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🐱 動詞測驗</h1>
-            <p class="subtitle">鮑思高尊華小學 P.5 English</p>
-        </header>
-        
+        <header><h1>🐱 動詞測驗</h1><p class="subtitle">鮑思高尊華小學 P.5 English</p></header>
         <div class="main">
             <div class="score" id="score">得分: 0 / 10</div>
             <div id="quiz-container"></div>
-            
             <button class="submit-all" onclick="submitAllAnswers()">全部提交 & 查看答案</button>
-            
-            <div style="text-align:center; margin:20px 0;">
+            <div style="text-align:center;margin:20px;">
                 <button onclick="startNewQuiz()">🔄 新一輪測驗</button>
                 <button onclick="showAllVerbs()">📋 查看完整動詞表</button>
             </div>
-            
             <div id="verbs-table" style="display:none;">
-                <h2 style="text-align:center;">完整動詞表（左右滑動查看）</h2>
+                <h2 style="text-align:center;">完整動詞表</h2>
+                <div class="tabs" id="tabs"></div>
                 <div class="table-wrapper">
                     <table id="full-table"></table>
                 </div>
@@ -142,45 +53,117 @@
 
     <script>
         const allVerbs = [
-            // Regular + Irregular verbs (full list from earlier)
-            {"base":"add","ing":"adding","past":"added","pp":"added"},
-            {"base":"annoy","ing":"annoying","past":"annoyed","pp":"annoyed"},
-            {"base":"beg","ing":"begging","past":"begged","pp":"begged"},
-            {"base":"close","ing":"closing","past":"closed","pp":"closed"},
-            {"base":"count","ing":"counting","past":"counted","pp":"counted"},
-            {"base":"cry","ing":"crying","past":"cried","pp":"cried"},
-            {"base":"dance","ing":"dancing","past":"danced","pp":"danced"},
-            {"base":"end","ing":"ending","past":"ended","pp":"ended"},
-            {"base":"enjoy","ing":"enjoying","past":"enjoyed","pp":"enjoyed"},
-            {"base":"empty","ing":"emptying","past":"emptied","pp":"emptied"},
-            {"base":"fry","ing":"frying","past":"fried","pp":"fried"},
-            {"base":"invite","ing":"inviting","past":"invited","pp":"invited"},
-            {"base":"laugh","ing":"laughing","past":"laughed","pp":"laughed"},
-            {"base":"plan","ing":"planning","past":"planned","pp":"planned"},
-            {"base":"pray","ing":"praying","past":"prayed","pp":"prayed"},
-            {"base":"rain","ing":"raining","past":"rained","pp":"rained"},
-            {"base":"stay","ing":"staying","past":"stayed","pp":"stayed"},
-            {"base":"stop","ing":"stopping","past":"stopped","pp":"stopped"},
-            {"base":"study","ing":"studying","past":"studied","pp":"studied"},
-            {"base":"taste","ing":"tasting","past":"tasted","pp":"tasted"},
-            {"base":"tidy","ing":"tidying","past":"tidied","pp":"tidied"},
-            {"base":"travel","ing":"travelling","past":"travelled","pp":"travelled"},
-            {"base":"try","ing":"trying","past":"tried","pp":"tried"},
-            {"base":"type","ing":"typing","past":"typed","pp":"typed"},
-            {"base":"wash","ing":"washing","past":"washed","pp":"washed"},
-            // Irregular (abbreviated for space - full list is in previous versions)
-            {"base":"be","ing":"being","past":"was/were","pp":"been"},
-            {"base":"beat","ing":"beating","past":"beat","pp":"beaten"},
-            {"base":"become","ing":"becoming","past":"became","pp":"become"},
-            {"base":"begin","ing":"beginning","past":"began","pp":"begun"},
-            {"base":"bite","ing":"biting","past":"bit","pp":"bitten"},
-            {"base":"blow","ing":"blowing","past":"blew","pp":"blown"},
-            {"base":"break","ing":"breaking","past":"broke","pp":"broken"},
-            {"base":"bring","ing":"bringing","past":"brought","pp":"brought"},
-            {"base":"build","ing":"building","past":"built","pp":"built"},
-            {"base":"burn","ing":"burning","past":"burnt (burned)","pp":"burnt (burned)"},
-            // ... (add all remaining irregular verbs from earlier code if needed)
-            {"base":"write","ing":"writing","past":"wrote","pp":"written"}
+            // Regular (只加ed)
+            {"base":"add","ing":"adding","past":"added","pp":"added","type":"regular"},
+            {"base":"annoy","ing":"annoying","past":"annoyed","pp":"annoyed","type":"regular"},
+            {"base":"beg","ing":"begging","past":"begged","pp":"begged","type":"regular"},
+            {"base":"close","ing":"closing","past":"closed","pp":"closed","type":"regular"},
+            {"base":"count","ing":"counting","past":"counted","pp":"counted","type":"regular"},
+            {"base":"cry","ing":"crying","past":"cried","pp":"cried","type":"regular"},
+            {"base":"dance","ing":"dancing","past":"danced","pp":"danced","type":"regular"},
+            {"base":"end","ing":"ending","past":"ended","pp":"ended","type":"regular"},
+            {"base":"enjoy","ing":"enjoying","past":"enjoyed","pp":"enjoyed","type":"regular"},
+            {"base":"empty","ing":"emptying","past":"emptied","pp":"emptied","type":"regular"},
+            {"base":"fry","ing":"frying","past":"fried","pp":"fried","type":"regular"},
+            {"base":"invite","ing":"inviting","past":"invited","pp":"invited","type":"regular"},
+            {"base":"laugh","ing":"laughing","past":"laughed","pp":"laughed","type":"regular"},
+            {"base":"plan","ing":"planning","past":"planned","pp":"planned","type":"regular"},
+            {"base":"pray","ing":"praying","past":"prayed","pp":"prayed","type":"regular"},
+            {"base":"rain","ing":"raining","past":"rained","pp":"rained","type":"regular"},
+            {"base":"stay","ing":"staying","past":"stayed","pp":"stayed","type":"regular"},
+            {"base":"stop","ing":"stopping","past":"stopped","pp":"stopped","type":"regular"},
+            {"base":"study","ing":"studying","past":"studied","pp":"studied","type":"regular"},
+            {"base":"taste","ing":"tasting","past":"tasted","pp":"tasted","type":"regular"},
+            {"base":"tidy","ing":"tidying","past":"tidied","pp":"tidied","type":"regular"},
+            {"base":"travel","ing":"travelling","past":"travelled","pp":"travelled","type":"regular"},
+            {"base":"try","ing":"trying","past":"tried","pp":"tried","type":"regular"},
+            {"base":"type","ing":"typing","past":"typed","pp":"typed","type":"regular"},
+            {"base":"wash","ing":"washing","past":"washed","pp":"washed","type":"regular"},
+            // Irregular
+            {"base":"be","ing":"being","past":"was/were","pp":"been","type":"irregular"},
+            {"base":"beat","ing":"beating","past":"beat","pp":"beaten","type":"irregular"},
+            {"base":"become","ing":"becoming","past":"became","pp":"become","type":"irregular"},
+            {"base":"begin","ing":"beginning","past":"began","pp":"begun","type":"irregular"},
+            {"base":"bite","ing":"biting","past":"bit","pp":"bitten","type":"irregular"},
+            {"base":"blow","ing":"blowing","past":"blew","pp":"blown","type":"irregular"},
+            {"base":"break","ing":"breaking","past":"broke","pp":"broken","type":"irregular"},
+            {"base":"bring","ing":"bringing","past":"brought","pp":"brought","type":"irregular"},
+            {"base":"build","ing":"building","past":"built","pp":"built","type":"irregular"},
+            {"base":"burn","ing":"burning","past":"burnt (burned)","pp":"burnt (burned)","type":"irregular"},
+            {"base":"buy","ing":"buying","past":"bought","pp":"bought","type":"irregular"},
+            {"base":"catch","ing":"catching","past":"caught","pp":"caught","type":"irregular"},
+            {"base":"choose","ing":"choosing","past":"chose","pp":"chosen","type":"irregular"},
+            {"base":"come","ing":"coming","past":"came","pp":"come","type":"irregular"},
+            {"base":"cost","ing":"costing","past":"cost","pp":"cost","type":"irregular"},
+            {"base":"cut","ing":"cutting","past":"cut","pp":"cut","type":"nochange"},
+            {"base":"dig","ing":"digging","past":"dug","pp":"dug","type":"irregular"},
+            {"base":"do","ing":"doing","past":"did","pp":"done","type":"irregular"},
+            {"base":"draw","ing":"drawing","past":"drew","pp":"drawn","type":"irregular"},
+            {"base":"drink","ing":"drinking","past":"drank","pp":"drunk","type":"irregular"},
+            {"base":"drive","ing":"driving","past":"drove","pp":"driven","type":"irregular"},
+            {"base":"eat","ing":"eating","past":"ate","pp":"eaten","type":"irregular"},
+            {"base":"fall","ing":"falling","past":"fell","pp":"fallen","type":"irregular"},
+            {"base":"feed","ing":"feeding","past":"fed","pp":"fed","type":"irregular"},
+            {"base":"feel","ing":"feeling","past":"felt","pp":"felt","type":"irregular"},
+            {"base":"fight","ing":"fighting","past":"fought","pp":"fought","type":"irregular"},
+            {"base":"find","ing":"finding","past":"found","pp":"found","type":"irregular"},
+            {"base":"fly","ing":"flying","past":"flew","pp":"flown","type":"irregular"},
+            {"base":"forget","ing":"forgetting","past":"forgot","pp":"forgotten","type":"irregular"},
+            {"base":"forgive","ing":"forgiving","past":"forgave","pp":"forgiven","type":"irregular"},
+            {"base":"freeze","ing":"freezing","past":"froze","pp":"frozen","type":"irregular"},
+            {"base":"get","ing":"getting","past":"got","pp":"got","type":"irregular"},
+            {"base":"give","ing":"giving","past":"gave","pp":"given","type":"irregular"},
+            {"base":"go","ing":"going","past":"went","pp":"gone","type":"irregular"},
+            {"base":"grow","ing":"growing","past":"grew","pp":"grown","type":"irregular"},
+            {"base":"have","ing":"having","past":"had","pp":"had","type":"irregular"},
+            {"base":"hear","ing":"hearing","past":"heard","pp":"heard","type":"irregular"},
+            {"base":"hide","ing":"hiding","past":"hid","pp":"hidden","type":"irregular"},
+            {"base":"hit","ing":"hitting","past":"hit","pp":"hit","type":"nochange"},
+            {"base":"hold","ing":"holding","past":"held","pp":"held","type":"irregular"},
+            {"base":"hurt","ing":"hurting","past":"hurt","pp":"hurt","type":"nochange"},
+            {"base":"keep","ing":"keeping","past":"kept","pp":"kept","type":"irregular"},
+            {"base":"know","ing":"knowing","past":"knew","pp":"known","type":"irregular"},
+            {"base":"learn","ing":"learning","past":"learnt (learned)","pp":"learnt (learned)","type":"irregular"},
+            {"base":"leave","ing":"leaving","past":"left","pp":"left","type":"irregular"},
+            {"base":"lend","ing":"lending","past":"lent","pp":"lent","type":"irregular"},
+            {"base":"lie","ing":"lying","past":"lay","pp":"lain","type":"irregular"},
+            {"base":"lose","ing":"losing","past":"lost","pp":"lost","type":"irregular"},
+            {"base":"make","ing":"making","past":"made","pp":"made","type":"irregular"},
+            {"base":"mean","ing":"meaning","past":"meant","pp":"meant","type":"irregular"},
+            {"base":"meet","ing":"meeting","past":"met","pp":"met","type":"irregular"},
+            {"base":"pay","ing":"paying","past":"paid","pp":"paid","type":"irregular"},
+            {"base":"put","ing":"putting","past":"put","pp":"put","type":"nochange"},
+            {"base":"read","ing":"reading","past":"read","pp":"read","type":"irregular"},
+            {"base":"ride","ing":"riding","past":"rode","pp":"ridden","type":"irregular"},
+            {"base":"ring","ing":"ringing","past":"rang","pp":"rung","type":"irregular"},
+            {"base":"rise","ing":"rising","past":"rose","pp":"risen","type":"irregular"},
+            {"base":"run","ing":"running","past":"ran","pp":"run","type":"irregular"},
+            {"base":"say","ing":"saying","past":"said","pp":"said","type":"irregular"},
+            {"base":"see","ing":"seeing","past":"saw","pp":"seen","type":"irregular"},
+            {"base":"sell","ing":"selling","past":"sold","pp":"sold","type":"irregular"},
+            {"base":"send","ing":"sending","past":"sent","pp":"sent","type":"irregular"},
+            {"base":"shine","ing":"shining","past":"shone","pp":"shone","type":"irregular"},
+            {"base":"shoot","ing":"shooting","past":"shot","pp":"shot","type":"irregular"},
+            {"base":"show","ing":"showing","past":"showed","pp":"shown","type":"irregular"},
+            {"base":"sing","ing":"singing","past":"sang","pp":"sung","type":"irregular"},
+            {"base":"sit","ing":"sitting","past":"sat","pp":"sat","type":"irregular"},
+            {"base":"sleep","ing":"sleeping","past":"slept","pp":"slept","type":"irregular"},
+            {"base":"speak","ing":"speaking","past":"spoke","pp":"spoken","type":"irregular"},
+            {"base":"spend","ing":"spending","past":"spent","pp":"spent","type":"irregular"},
+            {"base":"stand","ing":"standing","past":"stood","pp":"stood","type":"irregular"},
+            {"base":"steal","ing":"stealing","past":"stole","pp":"stolen","type":"irregular"},
+            {"base":"sweep","ing":"sweeping","past":"swept","pp":"swept","type":"irregular"},
+            {"base":"swim","ing":"swimming","past":"swam","pp":"swum","type":"irregular"},
+            {"base":"take","ing":"taking","past":"took","pp":"taken","type":"irregular"},
+            {"base":"teach","ing":"teaching","past":"taught","pp":"taught","type":"irregular"},
+            {"base":"tear","ing":"tearing","past":"tore","pp":"torn","type":"irregular"},
+            {"base":"tell","ing":"telling","past":"told","pp":"told","type":"irregular"},
+            {"base":"think","ing":"thinking","past":"thought","pp":"thought","type":"irregular"},
+            {"base":"throw","ing":"throwing","past":"threw","pp":"thrown","type":"irregular"},
+            {"base":"understand","ing":"understanding","past":"understood","pp":"understood","type":"irregular"},
+            {"base":"wake","ing":"waking","past":"woke","pp":"woken","type":"irregular"},
+            {"base":"wear","ing":"wearing","past":"wore","pp":"worn","type":"irregular"},
+            {"base":"write","ing":"writing","past":"wrote","pp":"written","type":"irregular"}
         ];
 
         let currentQuiz = [];
@@ -191,7 +174,6 @@
             document.getElementById('score').textContent = '得分: 0 / 10';
             const container = document.getElementById('quiz-container');
             container.innerHTML = '';
-            
             const shuffled = [...allVerbs].sort(() => Math.random() - 0.5);
             currentQuiz = shuffled.slice(0, 5);
             
@@ -202,14 +184,8 @@
                     <div style="font-size:1.2em;color:#666;">問題 ${index + 1}</div>
                     <div class="verb-base">${verb.base}</div>
                     <div class="input-group">
-                        <div class="input-box">
-                            <label>過去式 (Past Tense)</label>
-                            <input type="text" id="past-${index}" placeholder="輸入過去式">
-                        </div>
-                        <div class="input-box">
-                            <label>過去分詞 (Past Participle)</label>
-                            <input type="text" id="pp-${index}" placeholder="輸入過去分詞">
-                        </div>
+                        <div class="input-box"><label>過去式 (Past Tense)</label><input type="text" id="past-${index}" placeholder="輸入過去式"></div>
+                        <div class="input-box"><label>過去分詞 (Past Participle)</label><input type="text" id="pp-${index}" placeholder="輸入過去分詞"></div>
                     </div>
                     <div id="feedback-${index}" class="feedback" style="display:none;"></div>
                 `;
@@ -223,47 +199,55 @@
                 const pastInput = document.getElementById(`past-${index}`);
                 const ppInput = document.getElementById(`pp-${index}`);
                 const feedback = document.getElementById(`feedback-${index}`);
-                
                 const userPast = pastInput.value.trim().toLowerCase();
                 const userPp = ppInput.value.trim().toLowerCase();
-                
                 const correctPast = verb.past.toLowerCase().replace(/ \(.*\)/g, '').split('/')[0].trim();
                 const correctPp = verb.pp.toLowerCase().replace(/ \(.*\)/g, '').split('/')[0].trim();
-                
                 const isPastCorrect = userPast === correctPast;
                 const isPpCorrect = userPp === correctPp;
-                
                 if (isPastCorrect) score++;
                 if (isPpCorrect) score++;
-                
-                let html = '';
-                if (isPastCorrect && isPpCorrect) {
-                    html = `✅ 全部正確！<br>過去式: <strong>${verb.past}</strong><br>過去分詞: <strong>${verb.pp}</strong>`;
-                    feedback.className = 'feedback correct';
-                } else {
-                    html = `過去式: ${isPastCorrect ? '✅ ' : '❌ '} <strong>${verb.past}</strong><br>`;
-                    html += `過去分詞: ${isPpCorrect ? '✅ ' : '❌ '} <strong>${verb.pp}</strong>`;
-                    feedback.className = 'feedback wrong';
-                }
+                let html = isPastCorrect && isPpCorrect ? 
+                    `✅ 全部正確！<br>過去式: <strong>${verb.past}</strong><br>過去分詞: <strong>${verb.pp}</strong>` :
+                    `過去式: ${isPastCorrect ? '✅' : '❌'} <strong>${verb.past}</strong><br>過去分詞: ${isPpCorrect ? '✅' : '❌'} <strong>${verb.pp}</strong>`;
                 feedback.innerHTML = html;
+                feedback.className = (isPastCorrect && isPpCorrect) ? 'feedback correct' : 'feedback wrong';
                 feedback.style.display = 'block';
-                
-                pastInput.disabled = true;
-                ppInput.disabled = true;
+                pastInput.disabled = ppInput.disabled = true;
             });
-            
             document.getElementById('score').textContent = `得分: ${score} / 10`;
         }
 
         function showAllVerbs() {
             const tableDiv = document.getElementById('verbs-table');
+            const tabsDiv = document.getElementById('tabs');
+            tabsDiv.innerHTML = `
+                <button class="tab-btn active" onclick="filterTable('all')">全部</button>
+                <button class="tab-btn" onclick="filterTable('regular')">Regular (只加ed)</button>
+                <button class="tab-btn" onclick="filterTable('irregular')">Irregular</button>
+                <button class="tab-btn" onclick="filterTable('nochange')">沒有變化</button>
+            `;
+            renderTable(allVerbs);
+            tableDiv.style.display = 'block';
+        }
+
+        function filterTable(type) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            let filtered = allVerbs;
+            if (type === 'regular') filtered = allVerbs.filter(v => v.type === 'regular');
+            if (type === 'irregular') filtered = allVerbs.filter(v => v.type === 'irregular');
+            if (type === 'nochange') filtered = allVerbs.filter(v => v.type === 'nochange');
+            renderTable(filtered);
+        }
+
+        function renderTable(verbs) {
             const table = document.getElementById('full-table');
             table.innerHTML = `<tr><th>Base Form</th><th>Present Participle</th><th>Past Tense</th><th>Past Participle</th></tr>`;
-            allVerbs.forEach(verb => {
+            verbs.forEach(verb => {
                 const row = table.insertRow();
                 row.innerHTML = `<td><strong>${verb.base}</strong></td><td>${verb.ing}</td><td>${verb.past}</td><td>${verb.pp}</td>`;
             });
-            tableDiv.style.display = 'block';
         }
 
         window.onload = startNewQuiz;
