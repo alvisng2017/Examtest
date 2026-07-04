@@ -33,7 +33,7 @@
 </head>
 <body>
     <div class="container">
-        <header><h1>🐱 動詞測驗</h1><p class="subtitle">鮑思高尊華小學 P.5 English - 只考不規則動詞</p></header>
+        <header><h1>🐱 動詞測驗</h1><p class="subtitle">鮑思高尊華小學 P.5 English</p></header>
         <div class="main">
             <div class="score" id="score">得分: 0 / 10</div>
             <div id="quiz-container"></div>
@@ -54,86 +54,102 @@
 
     <script>
         const allVerbs = [
-            {"base":"be","ing":"being","past":"was/were","pp":"been","type":"irregular"},
-            {"base":"beat","ing":"beating","past":"beat","pp":"beaten","type":"irregular"},
-            {"base":"become","ing":"becoming","past":"became","pp":"become","type":"irregular"},
-            {"base":"begin","ing":"beginning","past":"began","pp":"begun","type":"irregular"},
-            {"base":"bite","ing":"biting","past":"bit","pp":"bitten","type":"irregular"},
-            {"base":"blow","ing":"blowing","past":"blew","pp":"blown","type":"irregular"},
-            {"base":"break","ing":"breaking","past":"broke","pp":"broken","type":"irregular"},
-            {"base":"bring","ing":"bringing","past":"brought","pp":"brought","type":"irregular"},
-            {"base":"build","ing":"building","past":"built","pp":"built","type":"irregular"},
-            {"base":"burn","ing":"burning","past":"burnt (burned)","pp":"burnt (burned)","type":"irregular"},
+            // 加ed
+            {"base":"add","ing":"adding","past":"added","pp":"added","type":"regular"},
+            {"base":"annoy","ing":"annoying","past":"annoyed","pp":"annoyed","type":"regular"},
+            {"base":"beg","ing":"begging","past":"begged","pp":"begged","type":"regular"},
+            {"base":"close","ing":"closing","past":"closed","pp":"closed","type":"regular"},
+            {"base":"count","ing":"counting","past":"counted","pp":"counted","type":"regular"},
+            {"base":"cry","ing":"crying","past":"cried","pp":"cried","type":"regular"},
+            {"base":"dance","ing":"dancing","past":"danced","pp":"danced","type":"regular"},
+            {"base":"end","ing":"ending","past":"ended","pp":"ended","type":"regular"},
+            {"base":"enjoy","ing":"enjoying","past":"enjoyed","pp":"enjoyed","type":"regular"},
+            {"base":"empty","ing":"emptying","past":"emptied","pp":"emptied","type":"regular"},
+            {"base":"fry","ing":"frying","past":"fried","pp":"fried","type":"regular"},
+            {"base":"invite","ing":"inviting","past":"invited","pp":"invited","type":"regular"},
+            {"base":"laugh","ing":"laughing","past":"laughed","pp":"laughed","type":"regular"},
+            {"base":"plan","ing":"planning","past":"planned","pp":"planned","type":"regular"},
+            {"base":"pray","ing":"praying","past":"prayed","pp":"prayed","type":"regular"},
+            {"base":"rain","ing":"raining","past":"rained","pp":"rained","type":"regular"},
+            {"base":"stay","ing":"staying","past":"stayed","pp":"stayed","type":"regular"},
+            {"base":"stop","ing":"stopping","past":"stopped","pp":"stopped","type":"regular"},
+            {"base":"study","ing":"studying","past":"studied","pp":"studied","type":"regular"},
+            {"base":"taste","ing":"tasting","past":"tasted","pp":"tasted","type":"regular"},
+            {"base":"tidy","ing":"tidying","past":"tidied","pp":"tidied","type":"regular"},
+            {"base":"travel","ing":"travelling","past":"travelled","pp":"travelled","type":"regular"},
+            {"base":"try","ing":"trying","past":"tried","pp":"tried","type":"regular"},
+            {"base":"type","ing":"typing","past":"typed","pp":"typed","type":"regular"},
+            {"base":"wash","ing":"washing","past":"washed","pp":"washed","type":"regular"},
+            // 無變化
+            {"base":"cost","ing":"costing","past":"cost","pp":"cost","type":"nochange"},
+            {"base":"cut","ing":"cutting","past":"cut","pp":"cut","type":"nochange"},
+            {"base":"hit","ing":"hitting","past":"hit","pp":"hit","type":"nochange"},
+            {"base":"hurt","ing":"hurting","past":"hurt","pp":"hurt","type":"nochange"},
+            {"base":"put","ing":"putting","past":"put","pp":"put","type":"nochange"},
+            {"base":"read","ing":"reading","past":"read","pp":"read","type":"nochange"},
+            // 有變化 (近似變化排在一起)
             {"base":"buy","ing":"buying","past":"bought","pp":"bought","type":"irregular"},
             {"base":"catch","ing":"catching","past":"caught","pp":"caught","type":"irregular"},
-            {"base":"choose","ing":"choosing","past":"chose","pp":"chosen","type":"irregular"},
-            {"base":"come","ing":"coming","past":"came","pp":"come","type":"irregular"},
-            {"base":"cost","ing":"costing","past":"cost","pp":"cost","type":"irregular"},
-            {"base":"dig","ing":"digging","past":"dug","pp":"dug","type":"irregular"},
-            {"base":"do","ing":"doing","past":"did","pp":"done","type":"irregular"},
-            {"base":"draw","ing":"drawing","past":"drew","pp":"drawn","type":"irregular"},
-            {"base":"drink","ing":"drinking","past":"drank","pp":"drunk","type":"irregular"},
-            {"base":"drive","ing":"driving","past":"drove","pp":"driven","type":"irregular"},
-            {"base":"eat","ing":"eating","past":"ate","pp":"eaten","type":"irregular"},
-            {"base":"fall","ing":"falling","past":"fell","pp":"fallen","type":"irregular"},
-            {"base":"feed","ing":"feeding","past":"fed","pp":"fed","type":"irregular"},
-            {"base":"feel","ing":"feeling","past":"felt","pp":"felt","type":"irregular"},
-            {"base":"fight","ing":"fighting","past":"fought","pp":"fought","type":"irregular"},
-            {"base":"find","ing":"finding","past":"found","pp":"found","type":"irregular"},
-            {"base":"fly","ing":"flying","past":"flew","pp":"flown","type":"irregular"},
-            {"base":"forget","ing":"forgetting","past":"forgot","pp":"forgotten","type":"irregular"},
-            {"base":"forgive","ing":"forgiving","past":"forgave","pp":"forgiven","type":"irregular"},
-            {"base":"freeze","ing":"freezing","past":"froze","pp":"frozen","type":"irregular"},
+            {"base":"teach","ing":"teaching","past":"taught","pp":"taught","type":"irregular"},
+            {"base":"bring","ing":"bringing","past":"brought","pp":"brought","type":"irregular"},
+            {"base":"think","ing":"thinking","past":"thought","pp":"thought","type":"irregular"},
             {"base":"get","ing":"getting","past":"got","pp":"got","type":"irregular"},
-            {"base":"give","ing":"giving","past":"gave","pp":"given","type":"irregular"},
-            {"base":"go","ing":"going","past":"went","pp":"gone","type":"irregular"},
-            {"base":"grow","ing":"growing","past":"grew","pp":"grown","type":"irregular"},
-            {"base":"have","ing":"having","past":"had","pp":"had","type":"irregular"},
-            {"base":"hear","ing":"hearing","past":"heard","pp":"heard","type":"irregular"},
+            {"base":"ride","ing":"riding","past":"rode","pp":"ridden","type":"irregular"},
+            {"base":"write","ing":"writing","past":"wrote","pp":"written","type":"irregular"},
+            {"base":"bite","ing":"biting","past":"bit","pp":"bitten","type":"irregular"},
             {"base":"hide","ing":"hiding","past":"hid","pp":"hidden","type":"irregular"},
-            {"base":"hold","ing":"holding","past":"held","pp":"held","type":"irregular"},
-            {"base":"keep","ing":"keeping","past":"kept","pp":"kept","type":"irregular"},
+            {"base":"beat","ing":"beating","past":"beat","pp":"beaten","type":"irregular"},
+            {"base":"eat","ing":"eating","past":"ate","pp":"eaten","type":"irregular"},
+            {"base":"give","ing":"giving","past":"gave","pp":"given","type":"irregular"},
+            {"base":"forgive","ing":"forgiving","past":"forgave","pp":"forgiven","type":"irregular"},
+            {"base":"see","ing":"seeing","past":"saw","pp":"seen","type":"irregular"},
+            {"base":"begin","ing":"beginning","past":"began","pp":"begun","type":"irregular"},
+            {"base":"drink","ing":"drinking","past":"drank","pp":"drunk","type":"irregular"},
+            {"base":"sing","ing":"singing","past":"sang","pp":"sung","type":"irregular"},
+            {"base":"swim","ing":"swimming","past":"swam","pp":"swum","type":"irregular"},
+            {"base":"ring","ing":"ringing","past":"rang","pp":"rung","type":"irregular"},
+            {"base":"run","ing":"running","past":"ran","pp":"run","type":"irregular"},
+            {"base":"come","ing":"coming","past":"came","pp":"come","type":"irregular"},
+            {"base":"become","ing":"becoming","past":"became","pp":"become","type":"irregular"},
+            {"base":"go","ing":"going","past":"went","pp":"gone","type":"irregular"},
             {"base":"know","ing":"knowing","past":"knew","pp":"known","type":"irregular"},
-            {"base":"learn","ing":"learning","past":"learnt (learned)","pp":"learnt (learned)","type":"irregular"},
+            {"base":"grow","ing":"growing","past":"grew","pp":"grown","type":"irregular"},
+            {"base":"blow","ing":"blowing","past":"blew","pp":"blown","type":"irregular"},
+            {"base":"draw","ing":"drawing","past":"drew","pp":"drawn","type":"irregular"},
+            {"base":"fly","ing":"flying","past":"flew","pp":"flown","type":"irregular"},
+            {"base":"show","ing":"showing","past":"showed","pp":"shown","type":"irregular"},
+            {"base":"break","ing":"breaking","past":"broke","pp":"broken","type":"irregular"},
+            {"base":"speak","ing":"speaking","past":"spoke","pp":"spoken","type":"irregular"},
+            {"base":"steal","ing":"stealing","past":"stole","pp":"stolen","type":"irregular"},
+            {"base":"choose","ing":"choosing","past":"chose","pp":"chosen","type":"irregular"},
+            {"base":"wake","ing":"waking","past":"woke","pp":"woken","type":"irregular"},
+            {"base":"wear","ing":"wearing","past":"wore","pp":"worn","type":"irregular"},
+            {"base":"tear","ing":"tearing","past":"tore","pp":"torn","type":"irregular"},
+            {"base":"forget","ing":"forgetting","past":"forgot","pp":"forgotten","type":"irregular"},
+            {"base":"freeze","ing":"freezing","past":"froze","pp":"frozen","type":"irregular"},
+            {"base":"drive","ing":"driving","past":"drove","pp":"driven","type":"irregular"},
+            {"base":"rise","ing":"rising","past":"rose","pp":"risen","type":"irregular"},
+            {"base":"fall","ing":"falling","past":"fell","pp":"fallen","type":"irregular"},
+            {"base":"understand","ing":"understanding","past":"understood","pp":"understood","type":"irregular"},
             {"base":"leave","ing":"leaving","past":"left","pp":"left","type":"irregular"},
-            {"base":"lend","ing":"lending","past":"lent","pp":"lent","type":"irregular"},
-            {"base":"lie","ing":"lying","past":"lay","pp":"lain","type":"irregular"},
             {"base":"lose","ing":"losing","past":"lost","pp":"lost","type":"irregular"},
             {"base":"make","ing":"making","past":"made","pp":"made","type":"irregular"},
             {"base":"mean","ing":"meaning","past":"meant","pp":"meant","type":"irregular"},
             {"base":"meet","ing":"meeting","past":"met","pp":"met","type":"irregular"},
             {"base":"pay","ing":"paying","past":"paid","pp":"paid","type":"irregular"},
-            {"base":"read","ing":"reading","past":"read","pp":"read","type":"irregular"},
-            {"base":"ride","ing":"riding","past":"rode","pp":"ridden","type":"irregular"},
-            {"base":"ring","ing":"ringing","past":"rang","pp":"rung","type":"irregular"},
-            {"base":"rise","ing":"rising","past":"rose","pp":"risen","type":"irregular"},
-            {"base":"run","ing":"running","past":"ran","pp":"run","type":"irregular"},
             {"base":"say","ing":"saying","past":"said","pp":"said","type":"irregular"},
-            {"base":"see","ing":"seeing","past":"saw","pp":"seen","type":"irregular"},
             {"base":"sell","ing":"selling","past":"sold","pp":"sold","type":"irregular"},
             {"base":"send","ing":"sending","past":"sent","pp":"sent","type":"irregular"},
             {"base":"shine","ing":"shining","past":"shone","pp":"shone","type":"irregular"},
             {"base":"shoot","ing":"shooting","past":"shot","pp":"shot","type":"irregular"},
-            {"base":"show","ing":"showing","past":"showed","pp":"shown","type":"irregular"},
-            {"base":"sing","ing":"singing","past":"sang","pp":"sung","type":"irregular"},
             {"base":"sit","ing":"sitting","past":"sat","pp":"sat","type":"irregular"},
             {"base":"sleep","ing":"sleeping","past":"slept","pp":"slept","type":"irregular"},
-            {"base":"speak","ing":"speaking","past":"spoke","pp":"spoken","type":"irregular"},
             {"base":"spend","ing":"spending","past":"spent","pp":"spent","type":"irregular"},
             {"base":"stand","ing":"standing","past":"stood","pp":"stood","type":"irregular"},
-            {"base":"steal","ing":"stealing","past":"stole","pp":"stolen","type":"irregular"},
             {"base":"sweep","ing":"sweeping","past":"swept","pp":"swept","type":"irregular"},
-            {"base":"swim","ing":"swimming","past":"swam","pp":"swum","type":"irregular"},
             {"base":"take","ing":"taking","past":"took","pp":"taken","type":"irregular"},
-            {"base":"teach","ing":"teaching","past":"taught","pp":"taught","type":"irregular"},
-            {"base":"tear","ing":"tearing","past":"tore","pp":"torn","type":"irregular"},
             {"base":"tell","ing":"telling","past":"told","pp":"told","type":"irregular"},
-            {"base":"think","ing":"thinking","past":"thought","pp":"thought","type":"irregular"},
-            {"base":"throw","ing":"throwing","past":"threw","pp":"thrown","type":"irregular"},
-            {"base":"understand","ing":"understanding","past":"understood","pp":"understood","type":"irregular"},
-            {"base":"wake","ing":"waking","past":"woke","pp":"woken","type":"irregular"},
-            {"base":"wear","ing":"wearing","past":"wore","pp":"worn","type":"irregular"},
-            {"base":"write","ing":"writing","past":"wrote","pp":"written","type":"irregular"}
+            {"base":"throw","ing":"throwing","past":"threw","pp":"thrown","type":"irregular"}
         ];
 
         let currentQuiz = [];
@@ -192,7 +208,9 @@
             const tabsDiv = document.getElementById('tabs');
             tabsDiv.innerHTML = `
                 <button class="tab-btn active" onclick="filterTable('all')">全部</button>
-                <button class="tab-btn" onclick="filterTable('irregular')">Irregular (變化)</button>
+                <button class="tab-btn" onclick="filterTable('regular')">加ed</button>
+                <button class="tab-btn" onclick="filterTable('nochange')">無變化</button>
+                <button class="tab-btn" onclick="filterTable('irregular')">有變化</button>
             `;
             renderTable(allVerbs);
             tableDiv.style.display = 'block';
@@ -201,7 +219,11 @@
         function filterTable(type) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
-            renderTable(allVerbs);
+            let filtered = allVerbs;
+            if (type === 'regular') filtered = allVerbs.filter(v => v.type === 'regular');
+            if (type === 'nochange') filtered = allVerbs.filter(v => v.type === 'nochange');
+            if (type === 'irregular') filtered = allVerbs.filter(v => v.type === 'irregular');
+            renderTable(filtered);
         }
 
         function renderTable(verbs) {
