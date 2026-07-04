@@ -15,13 +15,14 @@
         .verb-base { font-size:1.8em; font-weight:bold; color:#2c3e50; text-align:center; margin:15px 0; }
         .input-group { display:flex; gap:15px; flex-wrap:wrap; }
         .input-box { flex:1; min-width:260px; }
-        input { width:100%; padding:12px; font-size:1.1em; border:2px solid #ddd; border-radius:8px; }
+        .input-box label { display:block; font-weight:bold; margin-bottom:6px; color:#555; }
+        input { width:100%; padding:12px; font-size:1.1em; border:2px solid #ddd; border-radius:8px; box-sizing:border-box; }
         button { padding:12px 25px; margin:8px; background:#4a6fa5; color:white; border:none; border-radius:8px; cursor:pointer; font-size:1.05em; }
-        .submit-all { display:block; margin:20px auto; padding:15px 40px; font-size:1.2em; }
-        .feedback { margin-top:15px; padding:15px; border-radius:10px; }
+        .submit-all { display:block; margin:25px auto; padding:15px 40px; font-size:1.2em; width:80%; max-width:400px; }
+        .feedback { margin-top:15px; padding:15px; border-radius:10px; font-weight:bold; }
         .correct { background:#d4edda; color:#155724; }
         .wrong { background:#f8d7da; color:#721c24; }
-        .tabs { display:flex; justify-content:center; margin:15px 0; flex-wrap:wrap; }
+        .tabs { display:flex; justify-content:center; flex-wrap:wrap; margin:15px 0; }
         .tab-btn { padding:10px 20px; margin:5px; background:#e2e8f0; border:none; border-radius:8px; cursor:pointer; }
         .tab-btn.active { background:#4a6fa5; color:white; }
         .table-wrapper { overflow-x:auto; border:1px solid #ddd; border-radius:8px; }
@@ -32,12 +33,12 @@
 </head>
 <body>
     <div class="container">
-        <header><h1>🐱 動詞測驗</h1><p class="subtitle">鮑思高尊華小學 P.5 English</p></header>
+        <header><h1>🐱 動詞測驗</h1><p class="subtitle">鮑思高尊華小學 P.5 English - 只考不規則動詞</p></header>
         <div class="main">
             <div class="score" id="score">得分: 0 / 10</div>
             <div id="quiz-container"></div>
             <button class="submit-all" onclick="submitAllAnswers()">全部提交 & 查看答案</button>
-            <div style="text-align:center;margin:20px;">
+            <div style="text-align:center; margin:20px 0;">
                 <button onclick="startNewQuiz()">🔄 新一輪測驗</button>
                 <button onclick="showAllVerbs()">📋 查看完整動詞表</button>
             </div>
@@ -53,33 +54,6 @@
 
     <script>
         const allVerbs = [
-            // Regular (只加ed)
-            {"base":"add","ing":"adding","past":"added","pp":"added","type":"regular"},
-            {"base":"annoy","ing":"annoying","past":"annoyed","pp":"annoyed","type":"regular"},
-            {"base":"beg","ing":"begging","past":"begged","pp":"begged","type":"regular"},
-            {"base":"close","ing":"closing","past":"closed","pp":"closed","type":"regular"},
-            {"base":"count","ing":"counting","past":"counted","pp":"counted","type":"regular"},
-            {"base":"cry","ing":"crying","past":"cried","pp":"cried","type":"regular"},
-            {"base":"dance","ing":"dancing","past":"danced","pp":"danced","type":"regular"},
-            {"base":"end","ing":"ending","past":"ended","pp":"ended","type":"regular"},
-            {"base":"enjoy","ing":"enjoying","past":"enjoyed","pp":"enjoyed","type":"regular"},
-            {"base":"empty","ing":"emptying","past":"emptied","pp":"emptied","type":"regular"},
-            {"base":"fry","ing":"frying","past":"fried","pp":"fried","type":"regular"},
-            {"base":"invite","ing":"inviting","past":"invited","pp":"invited","type":"regular"},
-            {"base":"laugh","ing":"laughing","past":"laughed","pp":"laughed","type":"regular"},
-            {"base":"plan","ing":"planning","past":"planned","pp":"planned","type":"regular"},
-            {"base":"pray","ing":"praying","past":"prayed","pp":"prayed","type":"regular"},
-            {"base":"rain","ing":"raining","past":"rained","pp":"rained","type":"regular"},
-            {"base":"stay","ing":"staying","past":"stayed","pp":"stayed","type":"regular"},
-            {"base":"stop","ing":"stopping","past":"stopped","pp":"stopped","type":"regular"},
-            {"base":"study","ing":"studying","past":"studied","pp":"studied","type":"regular"},
-            {"base":"taste","ing":"tasting","past":"tasted","pp":"tasted","type":"regular"},
-            {"base":"tidy","ing":"tidying","past":"tidied","pp":"tidied","type":"regular"},
-            {"base":"travel","ing":"travelling","past":"travelled","pp":"travelled","type":"regular"},
-            {"base":"try","ing":"trying","past":"tried","pp":"tried","type":"regular"},
-            {"base":"type","ing":"typing","past":"typed","pp":"typed","type":"regular"},
-            {"base":"wash","ing":"washing","past":"washed","pp":"washed","type":"regular"},
-            // Irregular
             {"base":"be","ing":"being","past":"was/were","pp":"been","type":"irregular"},
             {"base":"beat","ing":"beating","past":"beat","pp":"beaten","type":"irregular"},
             {"base":"become","ing":"becoming","past":"became","pp":"become","type":"irregular"},
@@ -95,7 +69,6 @@
             {"base":"choose","ing":"choosing","past":"chose","pp":"chosen","type":"irregular"},
             {"base":"come","ing":"coming","past":"came","pp":"come","type":"irregular"},
             {"base":"cost","ing":"costing","past":"cost","pp":"cost","type":"irregular"},
-            {"base":"cut","ing":"cutting","past":"cut","pp":"cut","type":"nochange"},
             {"base":"dig","ing":"digging","past":"dug","pp":"dug","type":"irregular"},
             {"base":"do","ing":"doing","past":"did","pp":"done","type":"irregular"},
             {"base":"draw","ing":"drawing","past":"drew","pp":"drawn","type":"irregular"},
@@ -118,9 +91,7 @@
             {"base":"have","ing":"having","past":"had","pp":"had","type":"irregular"},
             {"base":"hear","ing":"hearing","past":"heard","pp":"heard","type":"irregular"},
             {"base":"hide","ing":"hiding","past":"hid","pp":"hidden","type":"irregular"},
-            {"base":"hit","ing":"hitting","past":"hit","pp":"hit","type":"nochange"},
             {"base":"hold","ing":"holding","past":"held","pp":"held","type":"irregular"},
-            {"base":"hurt","ing":"hurting","past":"hurt","pp":"hurt","type":"nochange"},
             {"base":"keep","ing":"keeping","past":"kept","pp":"kept","type":"irregular"},
             {"base":"know","ing":"knowing","past":"knew","pp":"known","type":"irregular"},
             {"base":"learn","ing":"learning","past":"learnt (learned)","pp":"learnt (learned)","type":"irregular"},
@@ -132,7 +103,6 @@
             {"base":"mean","ing":"meaning","past":"meant","pp":"meant","type":"irregular"},
             {"base":"meet","ing":"meeting","past":"met","pp":"met","type":"irregular"},
             {"base":"pay","ing":"paying","past":"paid","pp":"paid","type":"irregular"},
-            {"base":"put","ing":"putting","past":"put","pp":"put","type":"nochange"},
             {"base":"read","ing":"reading","past":"read","pp":"read","type":"irregular"},
             {"base":"ride","ing":"riding","past":"rode","pp":"ridden","type":"irregular"},
             {"base":"ring","ing":"ringing","past":"rang","pp":"rung","type":"irregular"},
@@ -176,7 +146,6 @@
             container.innerHTML = '';
             const shuffled = [...allVerbs].sort(() => Math.random() - 0.5);
             currentQuiz = shuffled.slice(0, 5);
-            
             currentQuiz.forEach((verb, index) => {
                 const qDiv = document.createElement('div');
                 qDiv.className = 'question';
@@ -223,22 +192,16 @@
             const tabsDiv = document.getElementById('tabs');
             tabsDiv.innerHTML = `
                 <button class="tab-btn active" onclick="filterTable('all')">全部</button>
-                <button class="tab-btn" onclick="filterTable('regular')">Regular (只加ed)</button>
-                <button class="tab-btn" onclick="filterTable('irregular')">Irregular</button>
-                <button class="tab-btn" onclick="filterTable('nochange')">沒有變化</button>
+                <button class="tab-btn" onclick="filterTable('irregular')">Irregular (變化)</button>
             `;
             renderTable(allVerbs);
             tableDiv.style.display = 'block';
         }
 
         function filterTable(type) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
-            let filtered = allVerbs;
-            if (type === 'regular') filtered = allVerbs.filter(v => v.type === 'regular');
-            if (type === 'irregular') filtered = allVerbs.filter(v => v.type === 'irregular');
-            if (type === 'nochange') filtered = allVerbs.filter(v => v.type === 'nochange');
-            renderTable(filtered);
+            renderTable(allVerbs);
         }
 
         function renderTable(verbs) {
