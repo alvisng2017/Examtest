@@ -1,274 +1,246 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>不規則動詞測驗 - P.5 English</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); margin:0; padding:15px; color:#333; }
-        .container { max-width:900px; margin:0 auto; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); overflow:hidden; }
-        header { background:#4a6fa5; color:white; padding:20px; text-align:center; }
-        h1 { margin:0; font-size:2.2em; }
-        .main { padding:20px; }
-        .score { text-align:center; font-size:1.5em; margin:15px; padding:12px; background:#e8f5e9; border-radius:10px; font-weight:bold; }
-        .question { background:#f8f9fa; padding:20px; margin-bottom:20px; border-radius:12px; border-left:6px solid #4a6fa5; }
-        .verb-base { font-size:1.8em; font-weight:bold; color:#2c3e50; text-align:center; margin:15px 0; }
-        .input-group { display:flex; gap:15px; flex-wrap:wrap; }
-        .input-box { flex:1; min-width:260px; }
-        .input-box label { display:block; font-weight:bold; margin-bottom:6px; color:#555; }
-        input { width:100%; padding:12px; font-size:1.1em; border:2px solid #ddd; border-radius:8px; box-sizing:border-box; }
-        button { padding:12px 25px; margin:8px; background:#4a6fa5; color:white; border:none; border-radius:8px; cursor:pointer; font-size:1.05em; }
-        .submit-all { display:block; margin:25px auto; padding:15px 40px; font-size:1.2em; width:80%; max-width:400px; }
-        .feedback { margin-top:15px; padding:15px; border-radius:10px; font-weight:bold; }
-        .correct { background:#d4edda; color:#155724; }
-        .wrong { background:#f8d7da; color:#721c24; }
-        .tabs { display:flex; justify-content:center; flex-wrap:wrap; margin:15px 0; }
-        .tab-btn { padding:10px 20px; margin:5px; background:#e2e8f0; border:none; border-radius:8px; cursor:pointer; }
-        .tab-btn.active { background:#4a6fa5; color:white; }
-        .table-wrapper { overflow-x:auto; border:1px solid #ddd; border-radius:8px; }
-        table { min-width:900px; width:100%; border-collapse:collapse; }
-        th, td { padding:12px; border:1px solid #ddd; white-space:nowrap; }
-        th { background:#4a6fa5; color:white; }
-        /* 分組顏色 */
-        tr.regular td { background:#e6f4ea; }
-        tr.nochange td { background:#e3f2fd; }
-        tr.group-ought td { background:#fff3e0; }      /* 淺橙 - ought/aught */
-        tr.group-vowel td { background:#f3e5f5; }     /* 淺紫 - i/a */
-        tr.group-ew td { background:#e0f2f1; }        /* 淺青 - ew/own */
-        tr.group-oke td { background:#e8f5e9; }       /* 淺綠 - oke/oken */
-        tr.group-it td { background:#fff8e1; }        /* 淺黃 - it/itten */
-        tr.group-ave td { background:#fce4ec; }       /* 淺粉 - ave/iven */
-        tr.group-eat td { background:#e0f7fa; }       /* 淺青 - eat/aten */
-        tr.group-other td { background:#f5f5f5; }     /* 淺灰 - 其他 */
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>澳門綜合能力評估開考 精選100題操題</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 12px; background: #f4f4f7; color: #1d1d1f; line-height: 1.55; }
+  .container { max-width: 820px; margin: 0 auto; }
+  h1 { text-align: center; color: #0071e3; font-size: 1.45rem; margin-bottom: 8px; }
+  .sub { text-align: center; color: #555; font-size: 0.9rem; margin-bottom: 16px; }
+  .intro { background: #fff; padding: 14px; border-radius: 12px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); font-size: 0.95rem; }
+  .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .cat-btn { background: #fff; border: 2px solid #0071e3; color: #0071e3; padding: 12px 8px; border-radius: 10px; font-size: 0.95rem; cursor: pointer; text-align: center; }
+  .cat-btn.active, .cat-btn:hover { background: #0071e3; color: #fff; }
+  .quiz-area { background: #fff; padding: 18px; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08); min-height: 280px; }
+  .question { font-size: 1.05rem; font-weight: 500; margin-bottom: 14px; }
+  .options { display: flex; flex-direction: column; gap: 9px; }
+  .option { background: #f5f5f7; border: 1px solid #d1d1d6; padding: 11px 14px; border-radius: 8px; cursor: pointer; }
+  .option:hover { background: #e8e8ed; }
+  .option.selected { border-color: #0071e3; background: #e8f2ff; }
+  .option.correct { background: #d4edda; border-color: #28a745; }
+  .option.wrong { background: #f8d7da; border-color: #dc3545; }
+  .explanation { margin-top: 14px; padding: 12px; background: #fff8e1; border-left: 4px solid #ffc107; border-radius: 4px; display: none; font-size: 0.95rem; }
+  .controls { margin-top: 18px; display: flex; justify-content: space-between; align-items: center; }
+  .btn { background: #0071e3; color: #fff; border: none; padding: 11px 22px; border-radius: 8px; font-size: 1rem; cursor: pointer; }
+  .btn:disabled { background: #ccc; }
+  .btn-sec { background: #6c757d; }
+  .progress, .score { text-align: center; }
+  .progress { color: #666; margin-bottom: 10px; }
+  .score { font-size: 1.25rem; margin: 16px 0; }
+  .hidden { display: none; }
+  footer { text-align: center; margin-top: 24px; font-size: 0.8rem; color: #888; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header><h1>🐱 動詞測驗</h1><p class="subtitle">鮑思高尊華小學 P.5 English</p></header>
-        <div class="main">
-            <div class="score" id="score">得分: 0 / 10</div>
-            <div id="quiz-container"></div>
-            <button class="submit-all" onclick="submitAllAnswers()">全部提交 & 查看答案</button>
-            <div style="text-align:center; margin:20px 0;">
-                <button onclick="startNewQuiz()">🔄 新一輪測驗</button>
-                <button onclick="showAllVerbs()">📋 查看完整動詞表</button>
-            </div>
-            <div id="verbs-table" style="display:none;">
-                <h2 style="text-align:center;">完整動詞表</h2>
-                <div class="tabs" id="tabs"></div>
-                <div class="table-wrapper">
-                    <table id="full-table"></table>
-                </div>
-            </div>
-        </div>
+<div class="container">
+  <h1>澳門綜合能力評估開考<br>精選100題高概率操題</h1>
+  <div class="sub">閉卷選擇題練習 · 選最佳答案 · 官方風格參考</div>
+  <div class="intro">
+    <strong>說明：</strong>根據官方試題範例、法例選擇題PDF及常見考點精選約100題。重點覆蓋基本法、憲法、工作人員通則（年假／遲到）、行政程序、職程制度、邏輯序列、圖表計算等。正式考試以最新官方公告為準。
+  </div>
+
+  <div class="categories" id="categories">
+    <button class="cat-btn" data-cat="all">全部混合 (~100)</button>
+    <button class="cat-btn" data-cat="law">法例 (~60)</button>
+    <button class="cat-btn" data-cat="logic">邏輯 (~20)</button>
+    <button class="cat-btn" data-cat="chart">圖表數據 (~10)</button>
+    <button class="cat-btn" data-cat="lang">語文理解 (~10)</button>
+  </div>
+
+  <div class="quiz-area" id="quizArea">
+    <div id="startScreen"><p style="text-align:center; font-size:1.05rem;">請選擇上方類別開始練習</p></div>
+    <div id="quizContent" class="hidden">
+      <div class="progress" id="progress"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="explanation" id="explanation"></div>
+      <div class="controls">
+        <button class="btn btn-sec" id="prevBtn" disabled>上一題</button>
+        <span id="qNum"></span>
+        <button class="btn" id="nextBtn">下一題</button>
+      </div>
     </div>
+    <div id="resultScreen" class="hidden">
+      <div class="score" id="finalScore"></div>
+      <p style="text-align:center;" id="resultMsg"></p>
+      <div style="text-align:center; margin-top:18px;">
+        <button class="btn" id="restartBtn">再練一次</button>
+      </div>
+    </div>
+  </div>
+  <footer>僅供練習參考 · 請以最新官方公告及PDF為準 · 錯題建議返去原文對照</footer>
+</div>
 
-    <script>
-        const allVerbs = [
-            // 加ed
-            {"base":"add","ing":"adding","past":"added","pp":"added","type":"regular"},
-            {"base":"annoy","ing":"annoying","past":"annoyed","pp":"annoyed","type":"regular"},
-            {"base":"beg","ing":"begging","past":"begged","pp":"begged","type":"regular"},
-            {"base":"close","ing":"closing","past":"closed","pp":"closed","type":"regular"},
-            {"base":"count","ing":"counting","past":"counted","pp":"counted","type":"regular"},
-            {"base":"cry","ing":"crying","past":"cried","pp":"cried","type":"regular"},
-            {"base":"dance","ing":"dancing","past":"danced","pp":"danced","type":"regular"},
-            {"base":"end","ing":"ending","past":"ended","pp":"ended","type":"regular"},
-            {"base":"enjoy","ing":"enjoying","past":"enjoyed","pp":"enjoyed","type":"regular"},
-            {"base":"empty","ing":"emptying","past":"emptied","pp":"emptied","type":"regular"},
-            {"base":"fry","ing":"frying","past":"fried","pp":"fried","type":"regular"},
-            {"base":"invite","ing":"inviting","past":"invited","pp":"invited","type":"regular"},
-            {"base":"laugh","ing":"laughing","past":"laughed","pp":"laughed","type":"regular"},
-            {"base":"plan","ing":"planning","past":"planned","pp":"planned","type":"regular"},
-            {"base":"pray","ing":"praying","past":"prayed","pp":"prayed","type":"regular"},
-            {"base":"rain","ing":"raining","past":"rained","pp":"rained","type":"regular"},
-            {"base":"stay","ing":"staying","past":"stayed","pp":"stayed","type":"regular"},
-            {"base":"stop","ing":"stopping","past":"stopped","pp":"stopped","type":"regular"},
-            {"base":"study","ing":"studying","past":"studied","pp":"studied","type":"regular"},
-            {"base":"taste","ing":"tasting","past":"tasted","pp":"tasted","type":"regular"},
-            {"base":"tidy","ing":"tidying","past":"tidied","pp":"tidied","type":"regular"},
-            {"base":"travel","ing":"travelling","past":"travelled","pp":"travelled","type":"regular"},
-            {"base":"try","ing":"trying","past":"tried","pp":"tried","type":"regular"},
-            {"base":"type","ing":"typing","past":"typed","pp":"typed","type":"regular"},
-            {"base":"wash","ing":"washing","past":"washed","pp":"washed","type":"regular"},
-            // 無變化
-            {"base":"cost","ing":"costing","past":"cost","pp":"cost","type":"nochange"},
-            {"base":"cut","ing":"cutting","past":"cut","pp":"cut","type":"nochange"},
-            {"base":"hit","ing":"hitting","past":"hit","pp":"hit","type":"nochange"},
-            {"base":"hurt","ing":"hurting","past":"hurt","pp":"hurt","type":"nochange"},
-            {"base":"put","ing":"putting","past":"put","pp":"put","type":"nochange"},
-            {"base":"read","ing":"reading","past":"read","pp":"read","type":"nochange"},
-            // 有變化 (近似變化已排在一起)
-            // Group 1: ought/aught 類
-            {"base":"buy","ing":"buying","past":"bought","pp":"bought","type":"irregular","group":"ought"},
-            {"base":"catch","ing":"catching","past":"caught","pp":"caught","type":"irregular","group":"ought"},
-            {"base":"teach","ing":"teaching","past":"taught","pp":"taught","type":"irregular","group":"ought"},
-            {"base":"bring","ing":"bringing","past":"brought","pp":"brought","type":"irregular","group":"ought"},
-            {"base":"think","ing":"thinking","past":"thought","pp":"thought","type":"irregular","group":"ought"},
-            // Group 2: i/a 類
-            {"base":"begin","ing":"beginning","past":"began","pp":"begun","type":"irregular","group":"vowel"},
-            {"base":"drink","ing":"drinking","past":"drank","pp":"drunk","type":"irregular","group":"vowel"},
-            {"base":"sing","ing":"singing","past":"sang","pp":"sung","type":"irregular","group":"vowel"},
-            {"base":"swim","ing":"swimming","past":"swam","pp":"swum","type":"irregular","group":"vowel"},
-            {"base":"ring","ing":"ringing","past":"rang","pp":"rung","type":"irregular","group":"vowel"},
-            {"base":"run","ing":"running","past":"ran","pp":"run","type":"irregular","group":"vowel"},
-            {"base":"come","ing":"coming","past":"came","pp":"come","type":"irregular","group":"vowel"},
-            {"base":"become","ing":"becoming","past":"became","pp":"become","type":"irregular","group":"vowel"},
-            // Group 3: ew/own 類
-            {"base":"blow","ing":"blowing","past":"blew","pp":"blown","type":"irregular","group":"ew"},
-            {"base":"draw","ing":"drawing","past":"drew","pp":"drawn","type":"irregular","group":"ew"},
-            {"base":"fly","ing":"flying","past":"flew","pp":"flown","type":"irregular","group":"ew"},
-            {"base":"grow","ing":"growing","past":"grew","pp":"grown","type":"irregular","group":"ew"},
-            {"base":"know","ing":"knowing","past":"knew","pp":"known","type":"irregular","group":"ew"},
-            {"base":"throw","ing":"throwing","past":"threw","pp":"thrown","type":"irregular","group":"ew"},
-            {"base":"show","ing":"showing","past":"showed","pp":"shown","type":"irregular","group":"ew"},
-            // Group 4: oke/oken 類
-            {"base":"break","ing":"breaking","past":"broke","pp":"broken","type":"irregular","group":"oke"},
-            {"base":"speak","ing":"speaking","past":"spoke","pp":"spoken","type":"irregular","group":"oke"},
-            {"base":"steal","ing":"stealing","past":"stole","pp":"stolen","type":"irregular","group":"oke"},
-            {"base":"wake","ing":"waking","past":"woke","pp":"woken","type":"irregular","group":"oke"},
-            {"base":"choose","ing":"choosing","past":"chose","pp":"chosen","type":"irregular","group":"oke"},
-            // Group 5: it/itten 類
-            {"base":"bite","ing":"biting","past":"bit","pp":"bitten","type":"irregular","group":"it"},
-            {"base":"hide","ing":"hiding","past":"hid","pp":"hidden","type":"irregular","group":"it"},
-            // Group 6: ave/iven 類
-            {"base":"give","ing":"giving","past":"gave","pp":"given","type":"irregular","group":"ave"},
-            {"base":"forgive","ing":"forgiving","past":"forgave","pp":"forgiven","type":"irregular","group":"ave"},
-            // Group 7: eat/aten 類
-            {"base":"beat","ing":"beating","past":"beat","pp":"beaten","type":"irregular","group":"eat"},
-            {"base":"eat","ing":"eating","past":"ate","pp":"eaten","type":"irregular","group":"eat"},
-            // 其他
-            {"base":"see","ing":"seeing","past":"saw","pp":"seen","type":"irregular","group":"other"},
-            {"base":"get","ing":"getting","past":"got","pp":"got","type":"irregular","group":"other"},
-            {"base":"forget","ing":"forgetting","past":"forgot","pp":"forgotten","type":"irregular","group":"other"},
-            {"base":"sell","ing":"selling","past":"sold","pp":"sold","type":"irregular","group":"other"},
-            {"base":"tell","ing":"telling","past":"told","pp":"told","type":"irregular","group":"other"},
-            {"base":"send","ing":"sending","past":"sent","pp":"sent","type":"irregular","group":"other"},
-            {"base":"spend","ing":"spending","past":"spent","pp":"spent","type":"irregular","group":"other"},
-            {"base":"lend","ing":"lending","past":"lent","pp":"lent","type":"irregular","group":"other"},
-            {"base":"find","ing":"finding","past":"found","pp":"found","type":"irregular","group":"other"},
-            {"base":"take","ing":"taking","past":"took","pp":"taken","type":"irregular","group":"other"},
-            {"base":"do","ing":"doing","past":"did","pp":"done","type":"irregular","group":"other"},
-            {"base":"go","ing":"going","past":"went","pp":"gone","type":"irregular","group":"other"},
-            {"base":"have","ing":"having","past":"had","pp":"had","type":"irregular","group":"other"},
-            {"base":"wear","ing":"wearing","past":"wore","pp":"worn","type":"irregular","group":"other"},
-            {"base":"tear","ing":"tearing","past":"tore","pp":"torn","type":"irregular","group":"other"},
-            {"base":"rise","ing":"rising","past":"rose","pp":"risen","type":"irregular","group":"other"},
-            {"base":"drive","ing":"driving","past":"drove","pp":"driven","type":"irregular","group":"other"},
-            {"base":"make","ing":"making","past":"made","pp":"made","type":"irregular","group":"other"},
-            {"base":"mean","ing":"meaning","past":"meant","pp":"meant","type":"irregular","group":"other"},
-            {"base":"meet","ing":"meeting","past":"met","pp":"met","type":"irregular","group":"other"},
-            {"base":"pay","ing":"paying","past":"paid","pp":"paid","type":"irregular","group":"other"},
-            {"base":"say","ing":"saying","past":"said","pp":"said","type":"irregular","group":"other"},
-            {"base":"shine","ing":"shining","past":"shone","pp":"shone","type":"irregular","group":"other"},
-            {"base":"shoot","ing":"shooting","past":"shot","pp":"shot","type":"irregular","group":"other"},
-            {"base":"sit","ing":"sitting","past":"sat","pp":"sat","type":"irregular","group":"other"},
-            {"base":"sleep","ing":"sleeping","past":"slept","pp":"slept","type":"irregular","group":"other"},
-            {"base":"spend","ing":"spending","past":"spent","pp":"spent","type":"irregular","group":"other"},
-            {"base":"stand","ing":"standing","past":"stood","pp":"stood","type":"irregular","group":"other"},
-            {"base":"sweep","ing":"sweeping","past":"swept","pp":"swept","type":"irregular","group":"other"},
-            {"base":"swim","ing":"swimming","past":"swam","pp":"swum","type":"irregular","group":"other"},
-            {"base":"take","ing":"taking","past":"took","pp":"taken","type":"irregular","group":"other"},
-            {"base":"tell","ing":"telling","past":"told","pp":"told","type":"irregular","group":"other"},
-            {"base":"throw","ing":"throwing","past":"threw","pp":"thrown","type":"irregular","group":"other"}
-        ];
+<script>
+const questions = {
+  law: [
+    {q: "《中華人民共和國澳門特別行政區基本法》何時起實施？", options: ["1999年12月19日", "1999年12月25日", "1999年12月20日", "1999年10月1日"], answer: 2, exp: "1993年3月31日全國人民代表大會通過決定，基本法自1999年12月20日起實施。"},
+    {q: "根據《澳門特別行政區基本法》，澳門特別行政區實施下列哪個方針？", options: ["一個國家，一種制度", "一個地區，兩種制度", "一個國家，兩種制度", "以上皆不是"], answer: 2, exp: "一國兩制是基本方針。"},
+    {q: "根據《基本法》，澳門特別行政區是中華人民共和國的：", options: ["可全部分離的部分", "可部分分離的部分", "可逐步分離的部分", "不可分離的部分"], answer: 3, exp: "澳門是中華人民共和國不可分離的部分。"},
+    {q: "根據《基本法》，授權澳門特別行政區依法實行高度自治的是：", options: ["中央人民政府", "全國人民代表大會", "最高人民法院", "國務院"], answer: 1, exp: "全國人民代表大會授權澳門特區實行高度自治。"},
+    {q: "根據《基本法》，澳門特別行政區享有：", options: ["行政管理權", "立法權", "獨立的司法權和終審權", "以上皆是"], answer: 3, exp: "澳門特區享有行政管理權、立法權、獨立的司法權和終審權。"},
+    {q: "根據《基本法》，澳門特別行政區維持原有的資本主義制度和生活方式不變，為期：", options: ["20年", "30年", "40年", "50年"], answer: 3, exp: "50年不變。"},
+    {q: "根據《基本法》，澳門特別行政區的正式語文是：", options: ["只有中文", "只有葡文", "中文和葡文", "中文、葡文和英文"], answer: 2, exp: "中文和葡文都是正式語文。"},
+    {q: "中華人民共和國現行憲法於哪一年通過？", options: ["1954年", "1975年", "1978年", "1982年"], answer: 3, exp: "現行憲法是1982年通過的。"},
+    {q: "第2/2009號法律是哪一部法律？", options: ["政府組織綱要法", "維護國家安全法", "公務人員職程制度", "公共部門勞動合同制度"], answer: 1, exp: "第2/2009號法律是《維護國家安全法》。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，每日或每周遲到超過多少分鐘，須作不合理缺勤紀錄？", options: ["每日十五分鐘或每周三十分鐘", "每日二十分鐘或每周四十分鐘", "每日三十分鐘或每周六十分鐘", "以上皆是"], answer: 0, exp: "每日遲到超過十五分鐘或每周超過三十分鐘須作不合理缺勤紀錄（經書面解釋且上級接納者除外）。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，除法律另有規定外，年假權屬不可放棄之權利，而年假權之實際享受：", options: ["不得以任何金錢補償代替", "得以相應日數之報酬補償代替", "得以雙倍之報酬補償代替", "得以其他津貼補償代替"], answer: 0, exp: "年假權不可放棄，且不得以金錢補償代替。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員每一曆年有權享受年假多少個工作日？", options: ["11個", "15個", "22個", "30個"], answer: 2, exp: "提供無中斷實際服務逾一年的工作人員，每一曆年有權享受年假二十二個工作日。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，每一曆年工作人員最少須享受多少個工作日的年假？", options: ["7個", "10個", "11個", "15個"], answer: 2, exp: "每一曆年最少享受十一個工作日的年假，其中一段不得少於十個工作日。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，基於適當理由並經部門領導批准，可將已到期及累積的最多多少個工作日的年假轉移至下一曆年？", options: ["11個", "15個", "22個", "30個"], answer: 2, exp: "最多可轉移二十二個工作日的年假。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，特別工作時間制度包括：", options: ["彈性工作時間", "輪值工作", "特定工作時間", "以上皆是"], answer: 3, exp: "特別工作時間制度包括彈性工作時間、輪值工作及特定工作時間。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，一般工作時間制度下，每周正常工作時數通常為：", options: ["30小時", "35小時", "36小時", "40小時"], answer: 2, exp: "一般制度每周正常工作時數為三十六小時（警務等特別情況除外）。"},
+    {q: "《行政程序法典》（第57/99/M號法令）引入的重要原則之一是：", options: ["善意原則", "絕對權力原則", "任意原則", "以上皆是"], answer: 0, exp: "確立了公共行政當局應遵循的善意原則。"},
+    {q: "第14/2009號法律是哪一部法律？", options: ["維護國家安全法", "公務人員職程制度", "公共部門勞動合同制度", "政府組織綱要法"], answer: 1, exp: "第14/2009號法律是《公務人員職程制度》。"},
+    {q: "第12/2015號法律是哪一部法律？", options: ["公務人員職程制度", "公共部門勞動合同制度", "工作表現評核一般制度", "政府組織綱要法"], answer: 1, exp: "第12/2015號法律是《公共部門勞動合同制度》。"},
+    {q: "第31/2004號行政法規是關於：", options: ["政府組織", "公務人員職程", "公共行政工作人員的工作表現評核一般制度", "行政程序"], answer: 2, exp: "第31/2004號行政法規是《公共行政工作人員的工作表現評核一般制度》。"},
+    {q: "根據《基本法》，澳門特別行政區的行政機關由下列哪類人士組成？", options: ["任何人士", "非永久性居民", "永久性居民", "以上皆可"], answer: 2, exp: "行政機關由澳門特別行政區永久性居民組成。"},
+    {q: "根據《基本法》，澳門特別行政區居民包括：", options: ["只有永久性居民", "只有非永久性居民", "永久性居民和非永久性居民", "以上皆不是"], answer: 2, exp: "澳門居民包括永久性居民和非永久性居民。"},
+    {q: "根據《基本法》，澳門永久性居民享有：", options: ["選舉權", "被選舉權", "選舉權和被選舉權", "以上皆不是"], answer: 2, exp: "永久性居民享有選舉權和被選舉權。"},
+    {q: "根據《基本法》，中央人民政府負責管理與澳門特別行政區有關的：", options: ["立法事務", "外交事務", "司法事務", "以上皆是"], answer: 1, exp: "中央人民政府負責管理與澳門特區有關的外交事務。"},
+    {q: "根據《基本法》，澳門特別行政區區旗的圖案包括：", options: ["五星和梅花", "五星、蓮花、大橋和海水", "只有蓮花和大橋", "五星和海水"], answer: 1, exp: "區旗以綠色為底，中間是五星、蓮花、大橋和海水的圖案。"},
+    {q: "根據《基本法》，澳門特別行政區自行立法禁止的行為包括：", options: ["愛國行為", "叛國行為", "支持中央政府的行為", "以上皆是"], answer: 1, exp: "澳門特區應自行立法禁止叛國、分裂國家等危害國家安全的行為（見第23條）。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員因結婚而缺勤，應在缺勤開始前最少提早多少日以書面通知，並在結婚後多少日內出示證明？", options: ["十五日；三十日", "三十日；十五日", "七日；十五日", "十五日；十五日"], answer: 0, exp: "最少提早十五日書面通知，並在締結婚姻後三十日內出示證明。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，合理缺勤的原因包括：", options: ["結婚", "患病", "親屬死亡", "以上皆是"], answer: 3, exp: "結婚、成為父母、親屬死亡、患病、工傷、捐血等均屬合理缺勤（須符合法定條件）。"},
+    {q: "根據《基本法》，澳門特別行政區的立法機關是：", options: ["行政長官", "立法會", "終審法院", "行政會"], answer: 1, exp: "立法會是澳門特別行政區的立法機關。"},
+    {q: "根據《基本法》，澳門特別行政區的終審權屬於：", options: ["中級法院", "初級法院", "終審法院", "最高人民法院"], answer: 2, exp: "澳門特別行政區享有獨立的司法權和終審權，終審權屬於澳門特區終審法院。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，擔任公職的年齡上限一般為：", options: ["60歲", "65歲", "70歲", "無上限"], answer: 1, exp: "擔任公職的年齡上限為六十五歲。"},
+    {q: "根據《基本法》，澳門特別行政區永久性居民是指：", options: ["在澳門通常居住連續七年以上的中國公民", "在澳門通常居住連續七年以上的人士（符合條件）", "任何在澳門出生的人士", "以上皆不是"], answer: 1, exp: "永久性居民包括在澳門通常居住連續七年以上的中國公民及其他符合條件的人士。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員每月已履行待命義務的日數由誰確認？", options: ["行政長官", "部門領導", "評核人", "同事"], answer: 1, exp: "由部門領導確認。"},
+    {q: "根據《基本法》，澳門特別行政區的行政長官由：", options: ["中央人民政府任命", "立法會選舉產生", "居民直選", "以上皆是"], answer: 0, exp: "行政長官由一個具有廣泛代表性的選舉委員會選出，由中央人民政府任命。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，年假應在何時享受？", options: ["任何時間", "到期的曆年內", "下一曆年", "無規定"], answer: 1, exp: "除法律另有規定外，年假應在到期的曆年內享受。"},
+    {q: "根據《行政程序法典》，行政程序是指：", options: ["行政行為本身", "行政合同", "為形成和表明公共行政當局意思或執行該意思而進行的有序行為及手續的連續", "以上皆是"], answer: 2, exp: "行政程序是為形成和表明公共行政當局的意思或執行該意思而進行的有序行為及手續的連續。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作時間制度可分為：", options: ["一般制度和特別制度", "只有一般制度", "只有特別制度", "無分類"], answer: 0, exp: "分為一般制度及特別制度。"},
+    {q: "根據《基本法》，澳門特別行政區的財政收入全部：", options: ["上繳中央", "由澳門特區自行支配", "由立法會支配", "由行政長官個人支配"], answer: 1, exp: "澳門特別行政區的財政收入全部由澳門特別行政區自行支配，不上繳中央人民政府。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，停職處分的時效一般自裁定轉為不可上訴之日起計經多少年完成？", options: ["兩年", "三年", "四年", "五年"], answer: 1, exp: "除另有規定，停職處分之時效自裁定轉為不可上訴之日起計，經三年完成。"},
+    {q: "根據《基本法》，澳門特別行政區的社會治安由：", options: ["中央人民政府負責", "澳門特別行政區政府負責", "立法會負責", "終審法院負責"], answer: 1, exp: "澳門特別行政區政府負責維持澳門特別行政區的社會治安。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員因患病缺勤，應在多長時間內以書面或口頭方式通知部門？", options: ["即時", "三個工作日內", "五個工作日內", "七個工作日內"], answer: 1, exp: "應在三個工作日內通知部門，並說明預計患病期及聯絡地點。"},
+    {q: "根據《基本法》，澳門特別行政區的貨幣金融制度由：", options: ["中央人民政府制定", "澳門特別行政區自行制定", "立法會單獨制定", "以上皆不是"], answer: 1, exp: "澳門特別行政區自行制定貨幣金融政策，保障金融企業和金融市場的經營自由。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，不合理缺勤的後果可能包括：", options: ["扣除薪酬", "影響評核", "紀律處分", "以上皆是"], answer: 3, exp: "不合理缺勤可能導致扣除薪酬、影響工作表現評核及紀律處分。"},
+    {q: "根據《基本法》，澳門特別行政區的教育制度由：", options: ["中央人民政府統一規定", "澳門特別行政區自行制定", "立法會制定全國統一標準", "以上皆不是"], answer: 1, exp: "澳門特別行政區政府自行制定教育政策，包括教育體制和管理、教學語言、經費分配等。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員享有的年假日數會因不合理缺勤而：", options: ["增加", "減少", "不變", "取消全部"], answer: 1, exp: "不合理缺勤會導致年假日數被扣除。"},
+    {q: "根據《基本法》，澳門特別行政區的對外事務中，哪些由中央人民政府負責？", options: ["外交事務", "國防事務", "外交和國防事務", "以上皆不是"], answer: 2, exp: "中央人民政府負責管理與澳門特區有關的外交事務和國防事務。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，彈性工作時間制度下，工作人員每周：", options: ["可欠時並轉移至下周", "不可欠時，亦不可將超出時數轉移至下周", "可自由決定工作時數", "無固定時段"], answer: 1, exp: "每周正常工作時數為三十六小時，不可欠時，亦不可將超出時數轉移至下周，並須有固定時段。"},
+    {q: "根據《基本法》，澳門特別行政區的立法會由：", options: ["全部直選產生", "全部間接選舉產生", "部分直選、部分間接選舉、部分委任產生", "全部委任產生"], answer: 2, exp: "立法會由直接選舉、間接選舉及委任的議員組成。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員因工傷而缺勤屬：", options: ["不合理缺勤", "合理缺勤", "無薪假", "年假"], answer: 1, exp: "在職時意外（工傷）屬合理缺勤。"},
+    {q: "根據《基本法》，澳門特別行政區的司法機關是：", options: ["立法會", "行政長官辦公室", "各級法院", "行政會"], answer: 2, exp: "澳門特別行政區的司法機關是各級法院。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，撤職處分的時效一般經多少年完成？", options: ["三年", "四年", "五年", "六年"], answer: 2, exp: "除另有規定，撤職處分之時效自裁定轉為不可上訴之日起計，經五年完成。"},
+    {q: "根據《基本法》，澳門特別行政區的居民有權依法：", options: ["申請社會福利", "享有受教育的權利", "享有勞動的權利", "以上皆是"], answer: 3, exp: "澳門居民享有多項基本權利，包括受教育、勞動、社會福利等。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員不得在每日辦公時間內未經許可擅離工作地點，否則：", options: ["無後果", "作不合理缺勤紀錄", "自動辭職", "以上皆不是"], answer: 1, exp: "未經有關上級許可而擅離工作地點，須作不合理缺勤紀錄。"},
+    {q: "根據《基本法》，澳門特別行政區的土地和自然資源屬於：", options: ["澳門特區所有", "國家所有", "私人所有", "立法會所有"], answer: 1, exp: "澳門特別行政區的土地和自然資源屬於國家所有，由澳門特區政府負責管理、使用、開發、出租或批給。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員因親屬死亡而缺勤的日數一般為：", options: ["一日", "三日至五日", "七日", "十日"], answer: 1, exp: "根據親屬關係不同，合理缺勤日數一般為三至五日（視乎具體情況）。"},
+    {q: "根據《基本法》，澳門特別行政區的行政長官任期為：", options: ["四年", "五年", "六年", "七年"], answer: 1, exp: "行政長官任期五年，可連任一次。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，工作人員的評核人在進行工作表現評核時，須就每日遲到不超過十五分鐘或每周不超過三十分鐘的情況：", options: ["不予考慮", "對其守時方面作出考慮", "自動扣分", "以上皆不是"], answer: 1, exp: "須就有關遲到的情況對其守時方面作出考慮。"},
+    {q: "根據《基本法》，澳門特別行政區的檢察機關是：", options: ["終審法院", "中級法院", "檢察院", "行政會"], answer: 2, exp: "澳門特別行政區的檢察機關是檢察院。"},
+    {q: "根據現行《澳門公共行政工作人員通則》，年假的實際享受不得少於連續多少個工作日的一段？", options: ["五日", "七日", "十日", "十一日"], answer: 2, exp: "其中一段享受年假的期間不得少於十個工作日。"}
+  ],
+  logic: [
+    {q: "甲、乙、丙、丁一起參與賽跑，已知：I. 甲比丁快。II. 乙不比丙慢。在四人之中，哪一個有可能最後抵達終點？", options: ["甲", "乙", "丁", "乙或丁"], answer: 3, exp: "甲不可能最後；丁有可能；乙與丙都有可能最後。故選乙或丁。"},
+    {q: "請找出下列數字序列中「？」的數字：160 → 80 → 40 → 20 → ？", options: ["1/5", "1", "10", "5"], answer: 2, exp: "每項除以2，20/2=10。"},
+    {q: "在ABC公司，去年男女員工人數的比例為3：2。今年該公司增聘了女性員工9名，因此男女比例變成6：5。ABC公司有多少名男性員工？", options: ["36", "45", "54", "無法確定"], answer: 2, exp: "設男性為x，解方程得x=54。"},
+    {q: "「河流」與「水」的關係，等同「風」與什麼的關係？", options: ["空氣", "龍捲風", "火", "以上皆不是"], answer: 0, exp: "河流是流動的水，風是流動的空氣。"},
+    {q: "已知：每次海嘯都會引起地震；只有地震才會出現地陷。由此可以推論出：", options: ["只有海嘯才會出現地陷", "每次海嘯都會出現地陷", "每次地震都會引起海嘯", "以上皆不是"], answer: 3, exp: "不能直接推出海嘯一定有地陷，或其他選項。"},
+    {q: "下列數字中，哪一個不屬於該組？110、132、148、154、176", options: ["132", "148", "154", "176"], answer: 1, exp: "其餘數字為偶數或符合特定規律，148是異常值（常見題型）。"},
+    {q: "I. 劇院內突然停電，燈光完全熄滅。II. 所有人都屏息靜氣，不發出任何聲響。III. 所有觀眾都靜靜地等候壓軸的演奏。IV. 因為，任何混亂都可能引致人們相互相踐踏的悲劇。以下哪一項把上列句子組合成語意最連貫的文章？", options: ["III，I，II，IV", "I，IV，II，III", "II，IV，I，III", "III，II，I，IV"], answer: 0, exp: "先等候演奏（III），然後停電（I），眾人屏息（II），以免混亂（IV）。"},
+    {q: "若 X > Y，且 Y 為負數，那麼下列哪一項一定正確？", options: ["X + Y > 0", "X - Y > 0", "X × Y > 0", "以上皆對"], answer: 1, exp: "X 大於負數 Y，X - Y 一定為正。"},
+    {q: "一個數字序列：2, 6, 12, 20, 30, ？下一個數字是？", options: ["40", "42", "44", "48"], answer: 1, exp: "差值為4,6,8,10,12，故30+12=42。"},
+    {q: "「書」與「頁」的關係，等同「電影」與什麼的關係？", options: ["場次", "演員", "鏡頭", "以上皆不是"], answer: 0, exp: "書由頁組成，電影由場次組成（常見類比）。"},
+    {q: "甲比乙高，乙比丙高，丙比丁高。下列哪一項正確？", options: ["甲比丁高", "丁比甲高", "乙比丁矮", "以上皆不是"], answer: 0, exp: "傳遞關係，甲最高，丁最矮。"},
+    {q: "下列哪一組數字的規律不同？3, 9, 27, 81 與 2, 4, 8, 16", options: ["第一組是乘3", "第二組是乘2", "兩者規律相同", "以上皆不是"], answer: 2, exp: "兩者都是等比數列，只是公比不同。"},
+    {q: "如果所有A都是B，所有B都是C，那麼：", options: ["所有A都是C", "所有C都是A", "有些A不是C", "以上皆不是"], answer: 0, exp: "三段論，所有A都是C。"},
+    {q: "一個圖表顯示某產品銷量：1月100，2月120，3月144，4月？如果按相同增長率，4月是多少？", options: ["160", "168", "172.8", "180"], answer: 2, exp: "增長率20%，144×1.2=172.8。"},
+    {q: "「醫生」與「醫院」的關係，等同「教師」與什麼的關係？", options: ["學校", "學生", "課本", "以上皆不是"], answer: 0, exp: "醫生在醫院工作，教師在學校工作。"},
+    {q: "下列條件推理：所有貓都怕水。小花是貓。因此：", options: ["小花怕水", "小花不怕水", "有些貓不怕水", "以上皆不是"], answer: 0, exp: "直接推論小花怕水。"},
+    {q: "數字序列：1, 4, 9, 16, 25, ？", options: ["30", "36", "49", "64"], answer: 1, exp: "平方數：1²,2²,3²,4²,5²,6²=36。"},
+    {q: "甲說乙在說謊，乙說丙在說謊，丙說甲和乙都在說謊。如果只有一人說真話，誰說真話？", options: ["甲", "乙", "丙", "無法確定"], answer: 2, exp: "假設丙說真話，則甲乙都說謊，符合只有一人真話。"},
+    {q: "「鋼琴」與「音樂」的關係，等同「畫筆」與什麼的關係？", options: ["繪畫", "顏色", "紙張", "以上皆不是"], answer: 0, exp: "鋼琴用於音樂，畫筆用於繪畫。"},
+    {q: "一個班級有40人，其中男生比女生多4人。男生有多少人？", options: ["18", "20", "22", "24"], answer: 2, exp: "設女生x，男生x+4，2x+4=40，x=18，男生22。"}
+  ],
+  chart: [
+    {q: "某一機構2015年男女員工每人每月平均加班日數，全年有多少個月份男女員工的平均加班日數皆超過4天？（假設四月、五月男女都超過4天；八月女員工剛好4天；十月男員工剛好4天）", options: ["2", "3", "4", "5"], answer: 0, exp: "只有四月和五月符合男女皆超過4天。"},
+    {q: "某部門全年預算200萬，其中人事費用佔45%，人事費用是多少？", options: ["60萬", "80萬", "90萬", "100萬"], answer: 2, exp: "200×45%=90萬。"},
+    {q: "某機構三個季度申請數量分別為120、150、180。第四季度若要令全年平均達到160，第四季度需要多少申請？", options: ["190", "200", "210", "220"], answer: 0, exp: "總和需640，前三季450，第四季190。"},
+    {q: "圖表顯示某產品四個月銷量：100, 120, 110, 130。平均銷量是多少？", options: ["110", "115", "120", "125"], answer: 1, exp: "(100+120+110+130)/4=115。"},
+    {q: "某公司員工男女比例為3:2，總人數50人。女員工有多少人？", options: ["15", "20", "25", "30"], answer: 1, exp: "3+2=5份，每份10人，女員工2份=20人。"},
+    {q: "圖表中某月份男員工平均加班5天，女員工平均加班3天，該月男女平均加班日數是多少？（假設人數相等）", options: ["3.5", "4", "4.5", "5"], answer: 1, exp: "(5+3)/2=4。"},
+    {q: "全年12個月中，有8個月的申請數量超過100宗。超過100宗的月份佔全年的百分比是多少？", options: ["50%", "60%", "66.7%", "75%"], answer: 2, exp: "8/12≈66.7%。"},
+    {q: "某部門三個項目預算分別為40萬、30萬、20萬。最大項目佔總預算的百分比是多少？", options: ["40%", "44.4%", "50%", "60%"], answer: 1, exp: "總90萬，40/90≈44.4%。"},
+    {q: "圖表顯示某指標由100上升至150，增長率是多少？", options: ["25%", "40%", "50%", "150%"], answer: 2, exp: "(150-100)/100=50%。"},
+    {q: "某機構男女員工總數100人，男員工佔60%。女員工有多少人？", options: ["30", "40", "50", "60"], answer: 1, exp: "女員工40%。"}
+  ],
+  lang: [
+    {q: "在2014年元旦，甲城市展開了「文明駕駛，切勿醉駕」運動。一方面，市政委員會將會檢討交通法例，加強罰則。另一方面，警方會加強設置路障和票控酒後駕駛者……政府更會製作廣告，在各大電視台黃金時段播出，宣傳醉駕的禍害。整個運動將會持續半年。上文提及哪些政府部門將會參與這項運動？", options: ["法院", "教育部門", "各大電視台", "以上皆不是"], answer: 3, exp: "文中提及市政委員會和警方。法院、教育部門無提及。電視台不是政府部門。"},
+    {q: "根據北美洲的調查數字，「酒後駕駛」和「分心駕駛」是導致致命交通意外的主要原因。其中「分心駕駛」者遇上交通意外的機會比起一般駕駛者高出三倍。根據上文，「分心駕駛」者遇上致命交通意外的機會比起一般駕駛者高出了多少倍？", options: ["一倍", "兩倍", "三倍", "以上皆不是"], answer: 3, exp: "文中說的是所有交通意外高出三倍，不是致命交通意外。"},
+    {q: "語文理解主要測試的能力是：", options: ["背誦原文", "掌握文章意旨、辨別事實與意見、詮釋資料", "計算複雜數學", "翻譯成葡文"], answer: 1, exp: "官方說明：測試思考和掌握文章意旨、辨別事實與意見、詮釋資料等方面的能力。"},
+    {q: "一篇文章說「政府將加強監管」，這句話屬於：", options: ["事實陳述", "意見表達", "數據分析", "以上皆不是"], answer: 1, exp: "「將加強」是計劃或意見，非已發生的事實。"},
+    {q: "閱讀下列句子：「根據統計，去年交通事故減少了15%。」這句話主要提供的是：", options: ["意見", "事實數據", "預測", "建議"], answer: 1, exp: "這是基於統計的事實陳述。"},
+    {q: "文章提到「部分市民認為新政策有效」，這句話中的「部分市民認為」屬於：", options: ["作者意見", "事實引用", "數據", "以上皆不是"], answer: 1, exp: "是引用他人意見，非作者直接觀點。"},
+    {q: "一篇關於環保的文章強調「減少塑膠使用至關重要」，主要目的是：", options: ["提供數據", "表達觀點並呼籲", "描述歷史", "以上皆不是"], answer: 1, exp: "強調重要性並隱含呼籲行動。"},
+    {q: "文中說「專家指出，過度使用手機可能影響睡眠」，這句話屬於：", options: ["確定事實", "專家意見", "作者親身經歷", "以上皆不是"], answer: 1, exp: "是專家的意見或研究結論，非絕對事實。"},
+    {q: "一篇新聞報導只列出事件經過，沒有評論。這篇文章主要是：", options: ["意見文章", "事實報導", "廣告", "以上皆不是"], answer: 1, exp: "純事實描述屬於事實報導。"},
+    {q: "閱讀理解時，若題目問「文中提及哪些部門」，應注意：", options: ["文中明確提到的", "可能相關的", "作者暗示的", "以上皆是"], answer: 0, exp: "應嚴格根據文中明確提及的內容作答，避免過度推論。"}
+  ]
+};
 
-        let currentQuiz = [];
-        let score = 0;
+let currentQuestions = [];
+let currentIndex = 0;
+let userAnswers = [];
+let score = 0;
+let selectedCategory = '';
 
-        function startNewQuiz() {
-            score = 0;
-            document.getElementById('score').textContent = '得分: 0 / 10';
-            const container = document.getElementById('quiz-container');
-            container.innerHTML = '';
-            const shuffled = [...allVerbs].sort(() => Math.random() - 0.5);
-            currentQuiz = shuffled.slice(0, 5);
-            currentQuiz.forEach((verb, index) => {
-                const qDiv = document.createElement('div');
-                qDiv.className = 'question';
-                qDiv.innerHTML = `
-                    <div style="font-size:1.2em;color:#666;">問題 ${index + 1}</div>
-                    <div class="verb-base">${verb.base}</div>
-                    <div class="input-group">
-                        <div class="input-box"><label>過去式 (Past Tense)</label><input type="text" id="past-${index}" placeholder="輸入過去式"></div>
-                        <div class="input-box"><label>過去分詞 (Past Participle)</label><input type="text" id="pp-${index}" placeholder="輸入過去分詞"></div>
-                    </div>
-                    <div id="feedback-${index}" class="feedback" style="display:none;"></div>
-                `;
-                container.appendChild(qDiv);
-            });
-        }
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedCategory = btn.dataset.cat;
+    startQuiz(selectedCategory);
+  });
+});
 
-        function submitAllAnswers() {
-            score = 0;
-            currentQuiz.forEach((verb, index) => {
-                const pastInput = document.getElementById(`past-${index}`);
-                const ppInput = document.getElementById(`pp-${index}`);
-                const feedback = document.getElementById(`feedback-${index}`);
-                const userPast = pastInput.value.trim().toLowerCase();
-                const userPp = ppInput.value.trim().toLowerCase();
-                const correctPast = verb.past.toLowerCase().replace(/ \(.*\)/g, '').split('/')[0].trim();
-                const correctPp = verb.pp.toLowerCase().replace(/ \(.*\)/g, '').split('/')[0].trim();
-                const isPastCorrect = userPast === correctPast;
-                const isPpCorrect = userPp === correctPp;
-                if (isPastCorrect) score++;
-                if (isPpCorrect) score++;
-                let html = isPastCorrect && isPpCorrect ? 
-                    `✅ 全部正確！<br>過去式: <strong>${verb.past}</strong><br>過去分詞: <strong>${verb.pp}</strong>` :
-                    `過去式: ${isPastCorrect ? '✅' : '❌'} <strong>${verb.past}</strong><br>過去分詞: ${isPpCorrect ? '✅' : '❌'} <strong>${verb.pp}</strong>`;
-                feedback.innerHTML = html;
-                feedback.className = (isPastCorrect && isPpCorrect) ? 'feedback correct' : 'feedback wrong';
-                feedback.style.display = 'block';
-                pastInput.disabled = ppInput.disabled = true;
-            });
-            document.getElementById('score').textContent = `得分: ${score} / 10`;
-        }
+function startQuiz(cat) {
+  currentQuestions = [];
+  if (cat === 'all') {
+    Object.values(questions).forEach(arr => currentQuestions.push(...arr));
+  } else {
+    currentQuestions = [...(questions[cat] || [])];
+  }
+  currentQuestions.sort(() => Math.random() - 0.5);
+  currentIndex = 0;
+  userAnswers = new Array(currentQuestions.length).fill(null);
+  score = 0;
+  document.getElementById('startScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('quizContent').classList.remove('hidden');
+  showQuestion();
+}
 
-        function showAllVerbs() {
-            const tableDiv = document.getElementById('verbs-table');
-            const tabsDiv = document.getElementById('tabs');
-            tabsDiv.innerHTML = `
-                <button class="tab-btn active" onclick="filterTable('all')">全部</button>
-                <button class="tab-btn" onclick="filterTable('regular')">加ed</button>
-                <button class="tab-btn" onclick="filterTable('nochange')">無變化</button>
-                <button class="tab-btn" onclick="filterTable('irregular')">有變化</button>
-            `;
-            renderTable(allVerbs);
-            tableDiv.style.display = 'block';
-        }
-
-        function filterTable(type) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            let filtered = allVerbs;
-            if (type === 'regular') filtered = allVerbs.filter(v => v.type === 'regular');
-            if (type === 'nochange') filtered = allVerbs.filter(v => v.type === 'nochange');
-            if (type === 'irregular') filtered = allVerbs.filter(v => v.type === 'irregular');
-            renderTable(filtered);
-        }
-
-        function renderTable(verbs) {
-            const table = document.getElementById('full-table');
-            table.innerHTML = `<tr><th>Base Form</th><th>Present Participle</th><th>Past Tense</th><th>Past Participle</th></tr>`;
-            verbs.forEach(verb => {
-                const row = table.insertRow();
-                let rowClass = '';
-                if (verb.type === 'regular') rowClass = 'regular';
-                else if (verb.type === 'nochange') rowClass = 'nochange';
-                else if (verb.group === 'ought') rowClass = 'group-ought';
-                else if (verb.group === 'vowel') rowClass = 'group-vowel';
-                else if (verb.group === 'ew') rowClass = 'group-ew';
-                else if (verb.group === 'oke') rowClass = 'group-oke';
-                else if (verb.group === 'it') rowClass = 'group-it';
-                else if (verb.group === 'ave') rowClass = 'group-ave';
-                else if (verb.group === 'eat') rowClass = 'group-eat';
-                else rowClass = 'group-other';
-                row.className = rowClass;
-                row.innerHTML = `<td><strong>${verb.base}</strong></td><td>${verb.ing}</td><td>${verb.past}</td><td>${verb.pp}</td>`;
-            });
-        }
-
-        window.onload = startNewQuiz;
-    </script>
-</body>
-</html>
+function showQuestion() {
+  const q = currentQuestions[currentIndex];
+  document.getElementById('progress').textContent = `第 ${currentIndex + 1} / ${currentQuestions.length} 題`;
+  document.getElementById('qNum').textContent = `${currentIndex + 1} / ${currentQuestions.length}`;
+  document.getElementById('question').textContent = q.q;
+  const optionsDiv = document.getElementById('options');
+  optionsDiv.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.textContent = String.fromCharCode(65 + i) + '. ' + opt;
+    if (userAnswers[currentIndex] !== null) {
+      if (i === q.answer) div.classList.add('correct');
+      if (i === userAnswers[currentIndex] && i !== q.answer) div.classList.add('wrong');
+      if (i === userAnswers[currentIndex]) div.classList.add('selected');
+    }
+    div.addEventListener('click', () => selectOption(i));
+    optionsDiv.appendChild(div);
+  });
+  const expDiv = document.getElementById('explanation');
+  if (userAnswers[currentIndex] !== null) {
+    expDiv.textContent = q.exp;
+    expDiv.style.display = 'block';
+  } else {
+    expDiv.style.display = 'none';
+  }
+  document.getElementById('prevBtn').disabl
