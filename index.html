@@ -31,7 +31,14 @@
   .progress { color: #666; margin-bottom: 10px; }
   .score { font-size: 1.25rem; margin: 16px 0; }
   .hidden { display: none; }
-  footer { text-align: center; margin-top: 24px; font-size: 0.8rem; color: #888; }
+  .bank-section { background: #fff; padding: 16px; border-radius: 12px; margin-top: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .bank-item { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #eee; }
+  .bank-item:last-child { border-bottom: none; }
+  .bank-q { font-weight: 500; margin-bottom: 6px; }
+  .bank-opt { margin: 3px 0; padding-left: 8px; }
+  .bank-ans { color: #28a745; font-weight: 500; margin-top: 4px; }
+  .bank-exp { color: #555; font-size: 0.92rem; margin-top: 4px; }
+  .toggle-bank { margin: 12px 0; text-align: center; }
 </style>
 </head>
 <body>
@@ -71,7 +78,10 @@
       </div>
     </div>
   </div>
-  <footer>僅供練習參考 · 請以最新官方公告及PDF為準 · 錯題建議返去原文對照</footer>
+  <div class="toggle-bank">
+    <button class="btn btn-sec" id="toggleBankBtn">顯示全部題庫（可閱讀／溫習）</button>
+  </div>
+  <div class="bank-section hidden" id="bankSection"></div>
 </div>
 
 <script>
@@ -243,4 +253,81 @@ function showQuestion() {
   } else {
     expDiv.style.display = 'none';
   }
-  document.getElementById('prevBtn').disabl
+  document.getElementById('prevBtn').disabled = currentIndex === 0;
+  document.getElementById('nextBtn').textContent = currentIndex === currentQuestions.length - 1 ? '查看結果' : '下一題';
+}
+
+function selectOption(idx) {
+  if (userAnswers[currentIndex] !== null) return;
+  userAnswers[currentIndex] = idx;
+  const q = currentQuestions[currentIndex];
+  if (idx === q.answer) score++;
+  showQuestion();
+}
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (currentIndex < currentQuestions.length - 1) {
+    currentIndex++;
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    showQuestion();
+  }
+});
+
+document.getElementById('restartBtn').addEventListener('click', () => {
+  if (selectedCategory) startQuiz(selectedCategory);
+});
+
+// Render full question bank
+function renderBank() {
+  const bank = document.getElementById('bankSection');
+  if (bank.innerHTML) return; // already rendered
+  let html = '<h2 style="text-align:center; color:#0071e3; margin-top:0;">完整題庫（含答案與解釋）</h2>';
+  const catNames = { law: '法例', logic: '語理及數理邏輯', chart: '圖表數據分析', lang: '語文理解' };
+  for (const [key, arr] of Object.entries(questions)) {
+    html += `<h3 style="color:#0071e3; margin-top:20px;">${catNames[key] || key}（${arr.length}題）</h3>`;
+    arr.forEach((item, idx) => {
+      const letter = String.fromCharCode(65 + item.answer);
+      html += `<div class="bank-item">
+        <div class="bank-q">${idx + 1}. ${item.q}</div>
+        ${item.options.map((o, i) => `<div class="bank-opt">${String.fromCharCode(65+i)}. ${o}</div>`).join('')}
+        <div class="bank-ans">答案：${letter}</div>
+        <div class="bank-exp">解釋：${item.exp}</div>
+      </div>`;
+    });
+  }
+  bank.innerHTML = html;
+}
+
+document.getElementById('toggleBankBtn').addEventListener('click', () => {
+  const section = document.getElementById('bankSection');
+  const btn = document.getElementById('toggleBankBtn');
+  if (section.classList.contains('hidden')) {
+    renderBank();
+    section.classList.remove('hidden');
+    btn.textContent = '隱藏題庫';
+  } else {
+    section.classList.add('hidden');
+    btn.textContent = '顯示全部題庫（可閱讀／溫習）';
+  }
+});
+
+function showResult() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+  const total = currentQuestions.length;
+  const percent = Math.round((score / total) * 100);
+  document.getElementById('finalScore').textContent = `得分：${score} / ${total} （${percent}%）`;
+  let msg = percent >= 80 ? '表現優秀！繼續保持。' : percent >= 60 ? '不錯，再加強弱項。' : percent >= 50 ? '剛剛合格，建議多練錯題。' : '需要加強，尤其是法例重點數字同原則。';
+  document.getElementById('resultMsg').textContent = msg;
+}
+</script>
+</body>
+</html>
